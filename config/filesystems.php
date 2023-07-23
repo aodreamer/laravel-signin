@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/files'), // Menggunakan 'app/files' sebagai root path
+            'url' => env('APP_URL').'/files', // Hapus baris ini agar URL tidak tersedia untuk akses langsung
+            'visibility' => 'private', // Atur visibility menjadi private agar tidak dapat diakses langsung melalui URL
+        ],
+
     ],
 
     /*
