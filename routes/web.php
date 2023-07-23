@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\VerifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");
+
+Route::get('/verify', [VerifyController::class, 'showUploadForm'])->name('verify.upload.form');
+Route::post('/verify', [VerifyController::class, 'uploadPdf'])->name('verify.upload.pdf');

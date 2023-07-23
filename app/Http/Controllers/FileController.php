@@ -20,13 +20,13 @@ class FileController extends Controller
         ]);
 
         $file = $request->file('pdf_file');
-        $hash = sha1_file($file->path()); // Menghasilkan hash dari isi file
+        $hash = hash_file('sha256', $file->path());; // Menghasilkan hash dari isi file
         $filename = $hash . '.' . $file->getClientOriginalExtension();
 
         // Simpan file ke folder yang aman
         $file->storeAs('pdf_files', $filename, 'files');
 
-        // Simpan informasi file ke database
+        // Simpan informasi file ke databas
         $user = Auth::user();
         $fileData = [
             'id_author' => $user->id,
