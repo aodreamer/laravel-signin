@@ -870,8 +870,8 @@ footer {
     </ul>
 
     <div id="account-container">
-      <a href="#">Register</a>
-      <a href="#">Login</a>
+      <a href="{{ route('register-user') }}">Register</a>
+      <a href="{{ route('login') }}">Login</a>
     </div>
   </nav>
 
