@@ -15,7 +15,7 @@
   <!-- Fontawesome cdn link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <title>Creative Learner</title>
+  <title>Our Digital Signature</title>
   <style>
     * {
   margin: 0;
@@ -173,8 +173,8 @@ nav ul li a:hover {
 }
 
 #creativity-features-image img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 }
 
 #creativity-features-text {
@@ -853,7 +853,7 @@ footer {
   <nav>
 
     <label for="name" id="logo-text">
-      <a href="#">Creative Learner</a>
+      <a href="#">Our Digital Signature</a>
     </label>
 
     <input type="checkbox" id="check">
@@ -878,26 +878,25 @@ footer {
   <header>
     <div id="header-container">
       <div id="header-page-title">
-        <h1>Creative landing <br> page</h1>
-        <p>A creative & modern landing page with lazer
-          <br> Template& we love make this amaging
+        <h1>Our Digital <br> Signature</h1>
+        <p>
+          <br> Aplikasi ini memiliki fitur untuk melakukan tanda tangan digital pada dokumen PDF pada perangkat Anda
         </p>
-        <div id="header-subscribe-form">
+        <!-- <div id="header-subscribe-form">
           <input type="email" name="" id="" placeholder="Enter your email">
           <input type="submit" value="Subscribe">
-        </div>
+        </div> -->
       </div>
       <div id="header-page-image">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSxNAKZmyBqAAnvGhwSVyZAOWAYl7D_-kz5xjD-YBVZX-raEA3A" alt="">
+      <a href="https://ibb.co/g9dq87J"><img src="https://i.ibb.co/V9xnGNT/Landing-Page.png" alt="Landing-Page" border="0" /></a>
       </div>
     </div>
   </header>
 
   <section class="awesome-feature">
     <div id="feature-text">
-      <h1>Awesome Features</h1>
-      <p>Lorem ipsum dolor sit amet consectetur <br> adipisicing elit. Fugiat reprehenderit nesciunt magnam
-        dolorem voluptate earum nihil, <br> enim similique libero labore nulla natus repellat esse assumenda.
+      <h1>Digital Signature in action</h1>
+      <p>Nikmati kemudahan dari tanda-tangan elektronik dimanapun dan kapanpun
       </p>
     </div>
   </section>
@@ -905,25 +904,26 @@ footer {
   <section id="creativity-features">
 
     <div id="creativity-features-image">
-      <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT4GvoUrEfrFfkPddQvyNU8XDftwZJcPXb30KM_lIxJUO5EyiA1" alt="">
+    <a href="https://ibb.co/LQxg15H"><img src="https://i.ibb.co/q0Ngp5V/2210-i201-027-S-m004-c13-contract-agreement-isometric-Converted.png" alt="2210-i201-027-S-m004-c13-contract-agreement-isometric-Converted" border="0" /></a>
     </div>
 
     <div id="creativity-features-text">
-      <h1>CREATIVE FEATURES</h1>
-      <h3>Build community & conversion <br>
-        with our suite of social tool</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident sed ea eveniet possimus dignissimos
-        error harum deleniti minus nostrum tempore, ipsum quas quibusdam! Voluptates fugiat cumque sequi totam
-        debitis animi libero iure magnam itaque neque.</p>
+      <!-- <h1>Manfaat digital signature</h1> -->
+      <h3>Integritas data</h3>
+      <p>Digital signature memastikan bahwa data atau informasi yang ditandatangani tidak mengalami perubahan atau manipulasi selama proses transmisi atau penyimpanan.</p>
+      <h3>Otentikasi </h3>
+      <p>Digital signature menggunakan konsep kunci publik dan pribadi, di mana kunci pribadi hanya dikenal oleh pemiliknya, sehingga dapat membuktikan bahwa pesan berasal dari sumber yang sah.</p>
+      <h3>Non-Repudiasi </h3>
+      <p>Digital signature mencegah pihak yang telah mengirim pesan atau dokumen untuk kemudian menyangkal tindakan tersebut.</p>
 
-      <div class="creative-footer-text">
+      <!-- <div class="creative-footer-text">
         <p>Donec pede justo fringilla vel nec. <br>
           cras ultricies li eu turpis hendrerit fringilla.</p>
       </div>
       <div id="creativity-btn">
         <a href="#">Read More</a>
         <a href="#">Buy Now</a>
-      </div>
+      </div> -->
     </div>
 
   </section>
