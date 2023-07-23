@@ -17,3 +17,4 @@ yarn-error.log
 /.idea
 /.vscode
 /storage/app/files/pdf_files/*.pdf
+/storage/app/files/p12/*.p12

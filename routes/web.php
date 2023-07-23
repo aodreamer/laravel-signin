@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\VerifyController;
+use App\Http\Controllers\CertificateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('upload-pdf', [FileController::class,'showUploadForm'])->name('upload.form');
     Route::post('upload-pdf', [FileController::class,'uploadPdf'])->name('upload.pdf');
+
+    Route::get('upload-p12', [CertificateController::class, 'showUploadForm'])->name('p12.form');
+    Route::post('upload-p12', [CertificateController::class, 'upload'])->name('upload.p12');
+    Route::get('showP12Password', [CertificateController::class, 'chooseUserWithP12'])->name('showP12Password.form');
+    Route::post('showP12Password', [CertificateController::class, 'showPassword'])->name('showP12Password');
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");
