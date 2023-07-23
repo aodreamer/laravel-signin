@@ -1,6 +1,6 @@
 <!-- resources/views/certificate/choose_user.blade.php -->
 
-@extends('layouts.app')
+@extends('auth.dashboard')
 @section('content')
     <div class="container mt-5">
         <h2>Pilih Pengguna dengan P12</h2>

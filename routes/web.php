@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('upload-p12', [CertificateController::class, 'showUploadForm'])->name('p12.form');
     Route::post('upload-p12', [CertificateController::class, 'upload'])->name('upload.p12');
+    
     Route::get('showP12Password', [CertificateController::class, 'chooseUserWithP12'])->name('showP12Password.form');
     Route::post('showP12Password', [CertificateController::class, 'showPassword'])->name('showP12Password');
 });

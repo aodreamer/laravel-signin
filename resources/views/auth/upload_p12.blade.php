@@ -1,5 +1,5 @@
 <!-- resources/views/upload_p12.blade.php -->
-@extends('layouts.app')
+@extends('auth.dashboard')
 
 @section('content')
     <div class="container mt-5">

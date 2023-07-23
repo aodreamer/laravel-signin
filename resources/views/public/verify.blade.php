@@ -1,31 +1,35 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header">
-            <h2>Verifikasi dokumen PDF anda</h2>
-        </div>
-        <div class="card-body">
-
-            <!-- Flex container to place both containers in the same row -->
-            <div class="flex-container">
-                <div class="image-container">
-                    <img src="https://verifikasipdf.rootca.id/assets/img/maskot.png" alt="Image" style="width: 150px;">
-                </div>
-                <div class="drop-zone" style="width: 400px;"> <!-- Adjust the width as desired -->
-                    <span class="drop-zone__prompt">
-                        <a href="https://imgbb.com/"><img src="https://i.ibb.co/nMNbPNw/Upload-Icon-Logo-PNG-Photos.png" alt="Upload-Icon-Logo-PNG-Photos" style="height: 50px; margin-right: 10px;" border="0"></a>
-                        Unggah dokumen pdf
-                    </span>
-                    <input type="file" class="drop-zone__input" id="pdf_file" name="pdf_file">
+@extends('auth.dashboard')
+        @section('content')
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Verifikasi dokumen PDF anda<</h2>
+                    </div>
+                    <div class="card-body">
+                        @if(session()->has('message'))
+                            <div class="alert alert-info">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('verify.upload.pdf') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="image-container">
+                                <img src="https://verifikasipdf.rootca.id/assets/img/maskot.png" alt="Image" style="width: 150px;">
+                            </div>
+                            <div class="" style="width: 400px;"> <!-- Adjust the width as desired -->
+                                <span class="drop-zone__prompt">
+                                    Unggah dokumen pdf
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="pdf_file">Select PDF File</label>
+                                <input type="file" class="form-control" id="pdf_file" name="pdf_file">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Check</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary mt-2" id="checkBtn">Check</button>
-        </div>
-    </div>
-</div>
 
 <style>
     /* Add your CSS styles here */
@@ -72,7 +76,7 @@
     }
 </style>
 
-<script>
+{{-- <script>
     // Add your JavaScript code here
     const dropZone = document.querySelector('.drop-zone');
     const input = document.getElementById('pdf_file');
@@ -98,11 +102,6 @@
         input.files = e.dataTransfer.files; // Assign the dropped file to the input
     });
 
-    // Handle the form submission when the Check button is clicked
-    checkBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const form = e.target.closest('form');
-        form.submit();
-    });
-</script>
+
+</script> --}}
 @endsection
