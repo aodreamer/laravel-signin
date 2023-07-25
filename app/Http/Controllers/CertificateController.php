@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Request as ChangeRequest;
 use Illuminate\Support\Facades\DB;
 
 class CertificateController extends Controller
@@ -56,21 +58,26 @@ class CertificateController extends Controller
 
     // Fungsi untuk menampilkan password dari pengguna yang dipilih
     public function showPassword(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required',
-        ]);
+{
+    $request->validate([
+        'password' => 'required',
+    ]);
 
-        $certificate = Certificate::where('user_id', $request->input('user_id'))->first();
+    $user = Auth::user();
+    $certificate = Certificate::where('user_id', $user->id)->first();
 
-        if ($certificate) {
-            $password = Crypt::decryptString($certificate->pass);
-            return back()->with('password', $password);
+    if ($certificate) {
+        $decryptedPassword = Crypt::decryptString($certificate->pass);
+        if (password_verify($request->input('password'), $user->password)) {
+            return back()->with('password', $decryptedPassword);
         } else {
-            return back()->with('error', 'Pengguna dengan P12 tidak ditemukan.');
+            return back()->with('error', 'Password akun tidak sesuai.');
         }
+    } else {
+        return back()->with('error', 'Anda tidak memiliki sertifikat.');
     }
-
+}
+    
     public function showCertificate()
     {
         $user = auth()->user();
@@ -99,5 +106,24 @@ class CertificateController extends Controller
         }
 
         return redirect()->route('cert.show')->with('error', 'Anda tidak memiliki sertifikat.');
+    }
+
+    public function submitRequest(Request $request)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:255',
+        ]);
+
+        // Ambil data user yang sedang login
+        $user = auth()->user();
+
+        // Buat pengajuan perubahan baru
+        ChangeRequest::create([
+            'user_id' => $user->id,
+            'reason' => $request->input('reason'),
+            'status' => 'pending', // Set status pengajuan ke "pending" (Anda bisa ganti sesuai kebutuhan)
+        ]);
+
+        return back()->with('success', 'Pengajuan perubahan sertifikat berhasil diajukan.');
     }
 }
