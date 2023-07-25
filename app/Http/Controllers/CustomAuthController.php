@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 class CustomAuthController extends Controller
 {
     public function index()
@@ -72,5 +74,41 @@ class CustomAuthController extends Controller
         Auth::logout();
   
         return Redirect('/');
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('auth.change_password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::find(auth()->id()); // atau cara lain untuk mendapatkan user yang sesuai
+    
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ], [
+            'current_password.required' => 'The current password field is required.',
+            'new_password.required' => 'The new password field is required.',
+            'new_password.min' => 'The new password must be at least 8 characters.',
+            'new_password.confirmed' => 'The new password confirmation does not match.',
+        ]);
+    
+        $currentPassword = $request->input('current_password');
+        $newPassword = $request->input('new_password');
+    
+        // Periksa apakah current_password sesuai dengan password yang ada di database
+        if (!Hash::check($currentPassword, $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => 'The current password is incorrect.',
+            ]);
+        }
+    
+        // Panggil method updatePassword pada model User untuk mengganti password
+        $user->updatePassword($newPassword);
+    
+        // Berikan pesan sukses atau lakukan tindakan lainnya sesuai kebutuhan
+        return redirect()->route('user.change-password')->with('success', 'Password berhasil diubah.');
     }
 }

@@ -888,7 +888,7 @@ footer {
         </div> -->
       </div>
       <div id="header-page-image">
-      <a href="https://ibb.co/g9dq87J"><img src="https://i.ibb.co/V9xnGNT/Landing-Page.png" alt="Landing-Page" border="0" /></a>
+      <a><img src="https://i.ibb.co/V9xnGNT/Landing-Page.png" alt="Landing-Page" border="0" /></a>
       </div>
     </div>
   </header>

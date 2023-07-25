@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
     
     Route::get('showP12Password', [CertificateController::class, 'chooseUserWithP12'])->name('showP12Password.form');
     Route::post('showP12Password', [CertificateController::class, 'showPassword'])->name('showP12Password');
+
+    Route::get('change-password', [CustomAuthController::class,'showChangePasswordForm'])->name('user.change-password');
+    Route::post('change-password', [CustomAuthController::class,'changePassword'])->name('user.change-password');
+
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");

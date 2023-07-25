@@ -32,6 +32,9 @@
                         <a class="nav-link" href="{{ route('upload.form') }}">Upload PDF</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.change-password') }}">Change password</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
                     @endguest
