@@ -70,4 +70,34 @@ class CertificateController extends Controller
             return back()->with('error', 'Pengguna dengan P12 tidak ditemukan.');
         }
     }
+
+    public function showCertificate()
+    {
+        $user = auth()->user();
+
+        // Mendapatkan data sertifikat milik user yang sedang login (jika ada)
+        $certificate = Certificate::where('user_id', $user->id)->first();
+
+        return view('auth.certificate', compact('certificate'));
+    }
+
+    public function downloadP12()
+    {
+        $user = auth()->user();
+
+        // Pengecekan apakah user yang sedang login memiliki sertifikat
+        $certificate = Certificate::where('user_id', $user->id)->first();
+
+        if ($certificate) {
+            $filePath = "files/p12/" . $certificate->p12_name;
+            $fileName = $certificate->p12_name;
+
+            // Pengecekan apakah sertifikat tersebut milik user yang sedang login
+            if ($certificate->user_id === $user->id) {
+                return Storage::download($filePath, $fileName);
+            }
+        }
+
+        return redirect()->route('cert.show')->with('error', 'Anda tidak memiliki sertifikat.');
+    }
 }

@@ -42,6 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::get('change-password', [CustomAuthController::class,'showChangePasswordForm'])->name('user.change-password');
     Route::post('change-password', [CustomAuthController::class,'changePassword'])->name('user.change-password');
 
+    Route::get('certificate', [CertificateController::class,'showCertificate'])->name('cert.show');
+    
+    Route::get('/download-certificate', [CertificateController::class, 'downloadP12'])->name('cert.download');
+
+    
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");
