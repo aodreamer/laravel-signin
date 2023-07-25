@@ -11,4 +11,8 @@ class File extends Model
     protected $fillable = [
         'id_author', 'filename', 'hash', 'date_upload'
     ];
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'id_author');
+    }
 }

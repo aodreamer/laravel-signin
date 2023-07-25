@@ -3,6 +3,23 @@
 @extends('auth.dashboard')
 
 @section('content')
+<div class="container">
+    <h2>Profil Pengguna</h2>
+    <table class="table">
+        <tr>
+            <th>Nama</th>
+            <td>{{ $user->name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ $user->email }}</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            <td>{{ $user->role }}</td>
+        </tr>
+    </table>
+</div>
     <div class="container mt-5">
         <h2>Change Password</h2>
         @if(session('success'))

@@ -35,7 +35,7 @@
                         <a class="nav-link" href="{{ route('cert.show') }}">Certificate</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.change-password') }}">Change password</a>
+                        <a class="nav-link" href="{{ route('user.change-password') }}">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>

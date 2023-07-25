@@ -55,3 +55,6 @@ Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landin
 
 Route::get('/verify', [VerifyController::class, 'showUploadForm'])->name('verify.upload.form');
 Route::post('/verify', [VerifyController::class, 'uploadPdf'])->name('verify.upload.pdf');
+
+Route::get('/jdih', [App\Http\Controllers\Controller::class, 'showJDIH'])->name('jdih.index');
+Route::get('/jdih/download/{id}', [App\Http\Controllers\Controller::class, 'downloadJDIH'])->name('jdih.download');

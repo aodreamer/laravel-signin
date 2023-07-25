@@ -78,7 +78,8 @@ class CustomAuthController extends Controller
 
     public function showChangePasswordForm()
     {
-        return view('auth.change_password');
+        $user = Auth::user();
+        return view('auth.change_password', compact('user'));
     }
 
     public function changePassword(Request $request)
@@ -111,4 +112,6 @@ class CustomAuthController extends Controller
         // Berikan pesan sukses atau lakukan tindakan lainnya sesuai kebutuhan
         return redirect()->route('user.change-password')->with('success', 'Password berhasil diubah.');
     }
+
+    
 }
