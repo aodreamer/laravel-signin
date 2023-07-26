@@ -50,4 +50,10 @@ class User extends Authenticatable
         $this->password = Hash::make($newPassword);
         $this->save();
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'Admin';
+    }
+
 }

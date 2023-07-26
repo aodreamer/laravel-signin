@@ -37,6 +37,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.change-password') }}">Profile</a>
                     </li>
+                    @if(auth()->user()->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.requests') }}">Admin</a>
+                    </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>

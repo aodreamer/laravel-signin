@@ -32,10 +32,11 @@
                             </div>
                             <div class="form-group mb-3">
                                 <select id="role" name="role" class="form-control" required>
-                                    <option value="">Select Role</option>
+                                    <option value="" disabled>Select Role</option>
                                     <option value="Ketua">Ketua</option>
                                     <option value="Kepala Seksi">Kepala Seksi</option>
                                     <option value="Kepala Biro">Kepala Biro</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                                 @if ($errors->has('role'))
                                 <span class="text-danger">{{ $errors->first('role') }}</span>

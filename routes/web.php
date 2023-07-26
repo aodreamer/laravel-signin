@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\VerifyController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/request-certificate', [CertificateController::class, 'submitRequest'])->name('cert.request');    
 
     
+});
+
+Route::middleware('admin')->group(function () {
+    Route::get('admin', [AdminController::class, 'showRequests'])->name('admin.requests');
+    Route::post('accrequest/{request}/accept', [AdminController::class, 'acceptRequest'])->name('accept.request');
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");
