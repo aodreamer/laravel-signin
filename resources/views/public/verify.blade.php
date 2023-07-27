@@ -1,35 +1,34 @@
 @extends('auth.dashboard')
-        @section('content')
-            <div class="container mt-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Verifikasi dokumen PDF anda<</h2>
-                    </div>
-                    <div class="card-body">
-                        @if(session()->has('message'))
-                            <div class="alert alert-info">
-                                {{ session('message') }}
-                            </div>
-                        @endif
-                        <form method="POST" action="{{ route('verify.upload.pdf') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="image-container">
-                                <img src="https://verifikasipdf.rootca.id/assets/img/maskot.png" alt="Image" style="width: 150px;">
-                            </div>
-                            <div class="" style="width: 400px;"> <!-- Adjust the width as desired -->
-                                <span class="drop-zone__prompt">
-                                    Unggah dokumen pdf
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="pdf_file">Select PDF File</label>
-                                <input type="file" class="form-control" id="pdf_file" name="pdf_file">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Check</button>
-                        </form>
-                    </div>
-                </div>
+@section('content')
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Verifikasi dokumen PDF anda</h2>
             </div>
+            <div class="card-body">
+                @if(session()->has('message'))
+                    <div class="alert alert-info">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('verify.upload.pdf') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="flex-container">
+                        <div class="drop-zone" id="dropZone">
+                            <span class="drop-zone__prompt">
+                                <div class="image-container">
+                                    <img src="https://verifikasipdf.rootca.id/assets/img/maskot.png" alt="Image" style="width: 150px;">
+                                </div>
+                                Unggah dokumen pdf
+                            </span>
+                            <input type="file" class="drop-zone__input" id="pdf_file" name="pdf_file">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Check</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 <style>
     /* Add your CSS styles here */
@@ -76,7 +75,7 @@
     }
 </style>
 
-{{-- <script>
+<script>
     // Add your JavaScript code here
     const dropZone = document.querySelector('.drop-zone');
     const input = document.getElementById('pdf_file');
@@ -101,7 +100,5 @@
         const file = e.dataTransfer.files[0];
         input.files = e.dataTransfer.files; // Assign the dropped file to the input
     });
-
-
-</script> --}}
+</script>
 @endsection
