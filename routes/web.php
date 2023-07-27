@@ -59,6 +59,8 @@ Route::middleware('admin')->group(function () {
     Route::get('admin/reuploadcertificate/{id}', [AdminController::class, 'showUploadForm'])->name('reupload.certificate.form');
     Route::post('admin/reuploadcertificate', [AdminController::class, 'reuploadCertificate'])->name('reupload.certificate');
 
+    Route::delete('admin/deletefile/{fileId}', [AdminController::class, 'deleteFile'])->name('delete.file');
+
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");

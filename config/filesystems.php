@@ -63,6 +63,21 @@ return [
             'visibility' => 'private', // Atur visibility menjadi private agar tidak dapat diakses langsung melalui URL
         ],
 
+        'pdf_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/files/pdf_files'),
+            'url' => env('APP_URL') . '/storage/files/pdf_files',
+            'visibility' => 'private',
+        ],
+
+        'p12' => [
+            'driver' => 'local',
+            'root' => storage_path('app/files/p12'),
+            'url' => env('APP_URL') . '/storage/files/p12',
+            'visibility' => 'private',
+        ],
+        
+
     ],
 
     /*

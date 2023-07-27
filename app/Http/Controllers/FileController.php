@@ -16,7 +16,7 @@ class FileController extends Controller
     public function uploadPdf(Request $request)
     {
         $request->validate([
-            'pdf_file' => 'required|mimes:pdf|max:4096', // Pastikan hanya menerima file PDF dengan ukuran maksimal 2MB
+            'pdf_file' => 'required|mimes:pdf', // Pastikan hanya menerima file PDF dengan ukuran maksimal 2MB
         ]);
 
         $file = $request->file('pdf_file');

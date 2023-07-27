@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Request as CertificateRequest;
 use App\Models\Certificate;
 use App\Models\User;
+use App\Models\File;
 
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +17,9 @@ class AdminController extends Controller
 {
     public function showRequests()
     {
+        $files = File::with('author')->get();
         $requests = CertificateRequest::all();
-        return view('admin.index', compact('requests'));
+        return view('admin.index', compact('requests','files'));
     }
 
     public function changeStatusRequest($id, $status)
@@ -58,6 +62,7 @@ class AdminController extends Controller
 
     // Jika data sertifikat ditemukan, lakukan update
     if ($certificate) {
+        Storage::disk('p12')->delete($certificate->p12_name);
         $certificate->update([
             'p12_name' => $file->getClientOriginalName(),
             'pass' => $pass,
@@ -73,4 +78,17 @@ class AdminController extends Controller
 
     return back()->with('success', 'File P12 berhasil diperbarui.');
     }
+
+    public function deleteFile($fileId)
+{
+    $file = File::findOrFail($fileId);
+
+    // Hapus file dari storage
+    Storage::disk('pdf_files')->delete(($file->hash).'.pdf');
+
+    // Hapus data file dari database
+    $file->delete();
+
+    return back()->with('success', 'File berhasil dihapus.');
+}
 }
