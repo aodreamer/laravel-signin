@@ -89,7 +89,11 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Hapus File</button>
-                        </form>                        
+                        </form>
+                        <form action=" {{route('update.file.form', ['fileId' =>$file->id])}}" method="GET">
+                            @csrf
+                            <input type="submit" value="Update File" class="btn btn-warning"/>
+                        </form>                      
                     </td>
                 </tr>
             @endforeach

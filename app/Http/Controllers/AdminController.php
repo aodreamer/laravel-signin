@@ -91,4 +91,33 @@ class AdminController extends Controller
 
     return back()->with('success', 'File berhasil dihapus.');
 }
+
+public function showupdateFile($id)
+{
+    $file = File::findOrFail($id);   
+    return view('admin.edit_file', compact('file'));
+}
+
+public function updateFile(Request $request, File $file)
+{
+    $request->validate([
+        'filename' => 'required|string|max:255',
+        'pdf_file' => 'nullable|file|mimetypes:application/pdf',
+    ]);
+
+    if ($request->hasFile('pdf_file')) {
+        // Delete the old file from storage
+        Storage::disk('pdf_files')->delete($file->filename);
+
+        // Store the new file in storage
+        $file->pdf_file = $request->file('pdf_file')->store('pdf_files', 'pdf_files');
+    }
+
+    // Update the file information in the database
+    $file->filename = $request->input('filename');
+    $file->save();
+
+    return redirect()->route('admin.requests')->with('success', 'File has been updated.');
+}
+
 }

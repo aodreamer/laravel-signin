@@ -60,6 +60,9 @@ Route::middleware('admin')->group(function () {
     Route::post('admin/reuploadcertificate', [AdminController::class, 'reuploadCertificate'])->name('reupload.certificate');
 
     Route::delete('admin/deletefile/{fileId}', [AdminController::class, 'deleteFile'])->name('delete.file');
+    
+    Route::get('/admin/updatefile/{fileId}', [AdminController::class, 'showupdateFile'])->name('update.file.form');
+    Route::put('/admin/updatefile/{file}', [AdminController::class, 'updateFile'])->name('update.file');
 
 });
 
