@@ -43,7 +43,10 @@
                             <input type="submit" value="Reject" class="btn btn-danger"/>
                         </form>
                         @elseif ($request->status === 'Progress')
-                            <a href="" class="btn btn-primary">Upload Sertifikat</a>
+                        <form action=" {{route('reupload.certificate.form', ['id' => $request->user->id])}}" method="GET">
+                            @csrf
+                            <input type="submit" value="Upload Sertifikat" class="btn btn-primary"/>
+                        </form>
                         @endif
                     </td>
                 </tr>
