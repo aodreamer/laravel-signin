@@ -14,12 +14,20 @@ class AdminController extends Controller
         return view('admin.index', compact('requests'));
     }
 
-    public function acceptRequest(CertificateRequest $request)
-    {
-        $request->status = 'Progress';
-        $request->save();
+    public function changeStatusRequest($id, $status)
+{
+    // Cari model Request berdasarkan id
+    $request = CertificateRequest::findOrFail($id);
 
-
-        return back()->with('success', 'Status berhasil diubah.');
+    // Validasi bahwa status yang dimasukkan adalah salah satu dari "Rejected", "Progress", atau "Success"
+    if (!in_array($status, ['Rejected', 'Progress', 'Success'])) {
+        return back()->with('error', 'Status tidak valid.');
     }
+
+    // Lakukan operasi sesuai kebutuhan, contoh:
+    $request->status = $status;
+    $request->save();
+
+    return back()->with('success', 'Status berhasil diubah.');
+}
 }

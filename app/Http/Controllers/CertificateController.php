@@ -84,8 +84,9 @@ class CertificateController extends Controller
 
         // Mendapatkan data sertifikat milik user yang sedang login (jika ada)
         $certificate = Certificate::where('user_id', $user->id)->first();
+        $requests = ChangeRequest::where('user_id', $user->id)->get();
 
-        return view('auth.certificate', compact('certificate'));
+        return view('auth.certificate', compact('certificate', 'requests'));
     }
 
     public function downloadP12()

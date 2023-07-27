@@ -36,7 +36,7 @@
     <h2>Pengajuan Perubahan Sertifikat</h2>
     @if(session('success'))
     <div class="alert alert-success">
-        Pass Sertifikat: {{ session('success') }}
+        {{ session('success') }}
     </div>
     @endif
     <form method="POST" action="{{ route('cert.request') }}">
@@ -47,5 +47,31 @@
         </div>
         <button type="submit" class="btn btn-primary">Ajukan Perubahan</button>
     </form>
+</div>
+
+<div class="container mt-5">
+    <h2>History Pengajuan</h2>
+    @if($requests->isEmpty())
+        <p>Anda belum melakukan pengajuan perubahan sertifikat.</p>
+    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal Pengajuan</th>
+                    <th>Alasan Pengajuan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($requests as $request)
+                    <tr>
+                        <td>{{ $request->created_at }}</td>
+                        <td>{{ $request->reason }}</td>
+                        <td>{{ $request->status }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
 </div>
 @endsection

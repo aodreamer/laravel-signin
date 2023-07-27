@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('admin')->group(function () {
     Route::get('admin', [AdminController::class, 'showRequests'])->name('admin.requests');
-    Route::post('accrequest/{request}/accept', [AdminController::class, 'acceptRequest'])->name('accept.request');
+    Route::post('accrequest/{request}/{status}', [AdminController::class, 'changeStatusRequest'])->name('changeStatus.request');
 });
 
 Route::get('/',[App\Http\Controllers\Controller::class,'landing'])->name("landing");
