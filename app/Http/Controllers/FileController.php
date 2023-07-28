@@ -20,7 +20,7 @@ class FileController extends Controller
         ]);
 
         $file = $request->file('pdf_file');
-        $hash = hash_file('sha256', $file->path());; // Menghasilkan hash dari isi file
+        $hash = hash_file('sha256', $file->path()); // Menghasilkan hash dari isi file
         $existingFile = File::where('hash', $hash)->first();
 
         if ($existingFile) {

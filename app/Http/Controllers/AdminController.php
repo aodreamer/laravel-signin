@@ -110,7 +110,8 @@ public function updateFile(Request $request, File $file)
         Storage::disk('pdf_files')->delete($file->filename);
 
         // Store the new file in storage
-        $file->pdf_file = $request->file('pdf_file')->store('pdf_files', 'pdf_files');
+        $request->file('pdf_file')->store('pdf_files', 'pdf_files');
+        $file->hash = hash_file('sha256', $file->path());
     }
 
     // Update the file information in the database
