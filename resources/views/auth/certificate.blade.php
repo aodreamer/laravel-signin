@@ -14,7 +14,7 @@
             <p>Anda tidak memiliki sertifikat.</p>
         @endif
 </div>
-
+@if ($certificate)
 <div class="container">
     <h2>Show P12 Password</h2>
     @if(session('password'))
@@ -74,4 +74,5 @@
         </table>
     @endif
 </div>
+@endif
 @endsection
