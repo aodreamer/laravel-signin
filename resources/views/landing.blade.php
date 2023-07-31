@@ -1092,7 +1092,7 @@ footer {
   <section class="awesome-feature">
     <div id="feature-text">
       <h1>Contact US</h1>
-      <p>Lorem ipsum dolor sit amet consectetur <br> adipisicing elit.
+      <!-- <p>Lorem ipsum dolor sit amet consectetur <br> adipisicing elit. -->
       </p>
     </div>
   </section>
@@ -1123,15 +1123,15 @@ footer {
     <div>
       <div class="contact-info">
         <i class="fa-solid fa-envelope"></i> &#58;
-        <p>support@website.com</p>
+        <p>contactus@cseeng.com</p>
       </div>
       <div class="contact-info">
         <i class="fa-solid fa-link"></i> &#58;
-        <p>www.website.com</p>
+        <p>http://www.cseeng.com</p>
       </div>
       <div class="contact-info">
         <i class="fa-solid fa-phone"></i> &#58;
-        <p>(+880) 012423523523</p>
+        <p>0812423523523</p>
       </div>
       <div class="contact-info">
         <i class="fa-solid fa-clock"></i> &#58;
@@ -1139,7 +1139,7 @@ footer {
       </div>
       <div class="contact-info">
         <i class="fa-solid fa-magnifying-glass-location"></i> &#58;
-        <p>1644 Deer Ridge Drive Rochelle Park, NJ 07662</p>
+        <p>Putat Nutug Street, Ciseeng, Bogor 16513</p>
       </div>
     </div>
   </section>
