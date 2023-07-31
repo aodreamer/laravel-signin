@@ -63,6 +63,7 @@ Route::middleware('admin')->group(function () {
     
     Route::get('/admin/updatefile/{fileId}', [AdminController::class, 'showupdateFile'])->name('update.file.form');
     Route::put('/admin/updatefile/{file}', [AdminController::class, 'updateFile'])->name('update.file');
+    
 
 });
 
@@ -73,3 +74,6 @@ Route::post('/verify', [VerifyController::class, 'uploadPdf'])->name('verify.upl
 
 Route::get('/jdih', [App\Http\Controllers\Controller::class, 'showJDIH'])->name('jdih.index');
 Route::get('/jdih/download/{id}', [App\Http\Controllers\Controller::class, 'downloadJDIH'])->name('jdih.download');
+
+Route::get('/check', [VerifyController::class, 'showCheckForm'])->name('verify.check.form');
+Route::post('/check', [VerifyController::class, 'checkPdf'])->name('verify.check.pdf');
