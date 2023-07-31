@@ -29,6 +29,7 @@ Route::middleware('guest')->group(function () {
 // Rute dashboard dan signout hanya untuk pengguna yang sudah login
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard'); 
+    
     Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
     Route::get('upload-pdf', [FileController::class,'showUploadForm'])->name('upload.form');
