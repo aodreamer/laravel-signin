@@ -1,4 +1,3 @@
-
 @extends('auth.dashboard')
 
 @section('content')
@@ -6,16 +5,17 @@
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
-        <h2>Sertifikat</h2>
-        @if ($certificate)
-            <a>{{$certificate->p12_name}}</a><br/>
-            <a href="{{ route('cert.download') }}" class="btn btn-primary">Download Sertifikat</a>
-        @else
-            <p>Anda tidak memiliki sertifikat.</p>
-        @endif
+    <h2>Sertifikat</h2>
+    @if ($certificate)
+        <p>Nama Sertifikat: {{$certificate->p12_name}}</p>
+        <a href="{{ route('cert.download') }}" class="btn btn-primary">Download Sertifikat</a>
+    @else
+        <p>Anda tidak memiliki sertifikat.</p>
+    @endif
 </div>
+
 @if ($certificate)
-<div class="container">
+<div class="container mt-5">
     <h2>Show P12 Password</h2>
     @if(session('password'))
     <div class="alert alert-success">
@@ -26,7 +26,7 @@
         @csrf
         <div class="mb-3">
             <label for="password" class="form-label">Password Akun</label>
-            <input type="password" name="password" class="form-control">
+            <input type="password" name="password" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Lihat Password P12</button>
     </form>
@@ -54,24 +54,26 @@
     @if($requests->isEmpty())
         <p>Anda belum melakukan pengajuan perubahan sertifikat.</p>
     @else
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tanggal Pengajuan</th>
-                    <th>Alasan Pengajuan</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($requests as $request)
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>{{ $request->created_at }}</td>
-                        <td>{{ $request->reason }}</td>
-                        <td>{{ $request->status }}</td>
+                        <th>Tanggal Pengajuan</th>
+                        <th>Alasan Pengajuan</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($requests as $request)
+                        <tr>
+                            <td>{{ $request->created_at }}</td>
+                            <td>{{ $request->reason }}</td>
+                            <td>{{ $request->status }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @endif
 </div>
 @endif

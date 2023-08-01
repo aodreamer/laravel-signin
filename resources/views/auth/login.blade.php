@@ -1,215 +1,181 @@
-@extends('layouts.app')
+@extends('auth.dashboard')
 
 @section('content')
 <style>
-    /* Add the provided CSS styles here */
-    html {
-        height: 100%;
-    }
-    body {
-        margin:0;
-        padding:0;
-        font-family: sans-serif;
-        background: linear-gradient(#141e30, #243b55);
-    }
+ .container {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
-    .login-box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 400px;
-        padding: 40px;
-        transform: translate(-50%, -50%);
-        background: rgba(0,0,0,.5);
-        box-sizing: border-box;
-        box-shadow: 0 15px 25px rgba(0,0,0,.6);
-        border-radius: 10px;
-    }
+.card {
+  flex: 0 0 calc(33.33% - 40px);
+  position: relative;
+  margin: 20px;
+}
 
-    .login-box h2 {
-        margin: 0 0 30px;
-        padding: 0;
-        color: #fff;
-        text-align: center;
-    }
+.face {
+  /* Remove the fixed width */
+  height: 200px;
+  transition: 0.4s;
+}
 
-    .login-box .user-box {
-        position: relative;
-    }
+.face1 {
+  position: relative;
+  background: linear-gradient(360deg, transparent, #03e9f4); /* Change the background to a linear gradient */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
 
-    .login-box .user-box input {
-        width: 100%;
-        padding: 10px 0;
-        font-size: 16px;
-        color: #fff;
-        margin-bottom: 30px;
-        border: none;
-        border-bottom: 1px solid #fff;
-        outline: none;
-        background: transparent;
-    }
+.card:hover .face1 {
+  transform: translateY(0);
+  box-shadow: inset 0 0 60px whitesmoke, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+}
 
-    .login-box .user-box label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 10px 0;
-        font-size: 16px;
-        color: #fff;
-        pointer-events: none;
-        transition: .5s;
-    }
+.face1 .content {
+  opacity: 0.2;
+  transition: 0.5s;
+  text-align: center;
+}
 
-    .login-box .user-box input:focus ~ label,
-    .login-box .user-box input:valid ~ label,
-    .login-box .user-box input:-webkit-autofill ~ label {
-        top: -20px;
-        left: 0;
-        color: #03e9f4;
-        font-size: 12px;
-    }
+.card:hover .face1 .content {
+  opacity: 1;
+}
 
-    .login-box form a {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        color: #03e9f4;
-        font-size: 16px;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: .5s;
-        margin-top: 40px;
-        letter-spacing: 4px;
-    }
+.face1 .content i {
+  font-size: 3em;
+  color: white;
+  display: inline-block;
+}
 
-    .login-box a:hover {
-        background: #03e9f4;
-        color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #03e9f4,
-                    0 0 25px #03e9f4,
-                    0 0 50px #03e9f4,
-                    0 0 100px #03e9f4;
-    }
+.face1 .content h3 {
+  font-size: 1em;
+  color: white;
+  text-align: center;
+}
 
-    .login-box a span {
-        position: absolute;
-        display: block;
-    }
+.face1 .content a {
+  transition: 0.5s;
+}
 
-    .login-box a span:nth-child(1) {
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #03e9f4);
-        animation: btn-anim1 1s linear infinite;
-    }
+.face2 {
+  position: relative;
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-100px);
+}
 
-    @keyframes btn-anim1 {
-        0% {
-            left: -100%;
-        }
-        50%,100% {
-            left: 100%;
-        }
-    }
+.card:hover .face2 {
+  transform: translateY(0);
+}
 
-    .login-box a span:nth-child(2) {
-        top: -100%;
-        right: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(180deg, transparent, #03e9f4);
-        animation: btn-anim2 1s linear infinite;
-        animation-delay: .25s;
-    }
+.face2 .content p,
+.face2 .content a {
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
 
-    @keyframes btn-anim2 {
-        0% {
-            top: -100%;
-        }
-        50%,100% {
-            top: 100%;
-        }
-    }
+.face2 .content a {
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+  outline: 1px dashed #333;
+  padding: 10px;
+  margin: 15px 0 0;
+  display: inline-block;
+}
 
-    .login-box a span:nth-child(3) {
-        bottom: 0;
-        right: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(270deg, transparent, #03e9f4);
-        animation: btn-anim3 1s linear infinite;
-        animation-delay: .5s;
-    }
+.face2 .content a:hover {
+  background: #333;
+  color: whitesmoke;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
 
-    @keyframes btn-anim3 {
-        0% {
-            right: -100%;
-        }
-        50%,100% {
-            right: 100%;
-        }
-    }
+.text-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-    .login-box a span:nth-child(4) {
-        bottom: -100%;
-        left: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(360deg, transparent, #03e9f4);
-        animation: btn-anim4 1s linear infinite;
-        animation-delay: .75s;
-    }
+.text-container h1 {
+  margin-right: 20px;
+}
 
-    @keyframes btn-anim4 {
-        0% {
-            bottom: -100%;
-        }
-        50%,100% {
-            bottom: 100%;
-        }
-    }
 </style>
 
-<main class="login-form">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="login-box">
-                    <h2>Login</h2>
-                    <form method="POST" action="{{ route('login.custom') }}">
-                        @csrf
-                        <div class="user-box">
-                            <input type="text" placeholder="Email" id="email" class="form-control" name="email" required autofocus>
-                            @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                            @endif
-                            <label style="margin-top: 10px;">Email</label>
-                        </div>
-                        <div class="user-box">
-                            <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
-                            @if ($errors->has('password'))
-                            <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                            <label style="margin-top: 10px;">Password</label>
-                        </div>
-                        <div class="form-group mb-3">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember"> Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="d-grid mx-auto">
-                            <button type="submit" class="btn btn-dark btn-block">Signin</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="text-container">
+  <h1>Hello, {{ auth()->user()->name }}!</h1>
+  <p>Welcome to our website. We are glad to have you here.</p>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="face face1">
+      <div class="content">
+        <a href="{{ route('p12.form') }}">
+          <img src="https://i.ibb.co/8NF8S13/signature.png" alt="signature" border="0" width="75" height="75">
+        </a>
+        <h3>Upload p12</h3>
+      </div>
     </div>
-</main>
+    <div class="face face2">
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+        </p>
+        <a href="{{ route('p12.form') }}">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="face face1">
+      <div class="content">
+        <a href="{{ route('upload.form') }}">
+          <img src="https://i.ibb.co/HN6Q0sj/download-2.png" alt="download-2" border="0" width="75" height="75">
+        </a>
+        <h3>Upload PDF</h3>
+      </div>
+    </div>
+    <div class="face face2">
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+        </p>
+        <a href="{{ route('upload.form') }}">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="face face1">
+      <div class="content">
+        <a href="{{ route('verify.upload.pdf') }}">
+          <img src="https://i.ibb.co/9nMznVP/verified.png" alt="verified" border="0" width="75" height="75">
+        </a>
+        <h3>Verify</h3>
+      </div>
+    </div>
+    <div class="face face2">
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+        </p>
+        <a href="{{ route('verify.upload.pdf') }}">Read More</a>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
