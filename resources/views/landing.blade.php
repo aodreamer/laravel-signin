@@ -150,7 +150,6 @@ nav ul li a:hover {
 .awesome-feature {
   text-align: center;
   padding: 0 50px;
-  margin-bottom: 50px;
 }
 
 #feature-text h1 {
@@ -880,12 +879,12 @@ footer {
   </nav>
 
   <header>
-  <div id="header-container">
+  <div id="header-container" style="background: linear-gradient(#141e30, #1b2840);">
     <div id="header-page-title">
       <a href="https://postimg.cc/rRdfbJVP">
         <img src="https://i.postimg.cc/rRdfbJVP/CSeng.png" alt="CSeng" border="0">
       </a>
-      <p>
+      <p style="color: white;">
         <br> Aplikasi ini memiliki fitur untuk melakukan tanda tangan digital pada dokumen PDF pada perangkat Anda
       </p>
       <!-- <div id="header-subscribe-form">
@@ -904,10 +903,10 @@ footer {
 </header>
 
 
-  <section class="awesome-feature">
+  <section class="awesome-feature"style="background: linear-gradient(#1b2840, #243b55);">
   <div id="feature-text">
-    <h1>Digital Signature in action</h1>
-    <p>Nikmati kemudahan dari tanda-tangan elektronik dimanapun dan kapanpun</p>
+    <h1 style="color: white;">Digital Signature in action</h1>
+    <p style="color: white;">Nikmati kemudahan dari tanda-tangan elektronik dimanapun dan kapanpun</p>
     <div id="creativity-btn">
       <a href="#" id="verify">Verify</a>
       <a href="#" id="jdih">JDIH</a>
@@ -915,7 +914,7 @@ footer {
   </div>
 </section>
 
-  <section id="creativity-features">
+  <section id="creativity-features"style="background: linear-gradient(#243b55, #2b4563);">
 
     <div id="creativity-features-image">
     <a href="https://ibb.co/LQxg15H"><img src="https://i.ibb.co/q0Ngp5V/2210-i201-027-S-m004-c13-contract-agreement-isometric-Converted.png" alt="2210-i201-027-S-m004-c13-contract-agreement-isometric-Converted" border="0" /></a>
@@ -923,12 +922,12 @@ footer {
 
     <div id="creativity-features-text">
       <!-- <h1>Manfaat digital signature</h1> -->
-      <h3>Integritas data</h3>
-      <p>Digital signature memastikan bahwa data atau informasi yang ditandatangani tidak mengalami perubahan atau manipulasi selama proses transmisi atau penyimpanan.</p>
-      <h3>Otentikasi </h3>
-      <p>Digital signature menggunakan konsep kunci publik dan pribadi, di mana kunci pribadi hanya dikenal oleh pemiliknya, sehingga dapat membuktikan bahwa pesan berasal dari sumber yang sah.</p>
-      <h3>Non-Repudiasi </h3>
-      <p>Digital signature mencegah pihak yang telah mengirim pesan atau dokumen untuk kemudian menyangkal tindakan tersebut.</p>
+      <h3 style="color: white;">Integritas data</h3>
+      <p style="color: white;">Digital signature memastikan bahwa data atau informasi yang ditandatangani tidak mengalami perubahan atau manipulasi selama proses transmisi atau penyimpanan.</p>
+      <h3 style="color: white;">Otentikasi </h3>
+      <p style="color: white;">Digital signature menggunakan konsep kunci publik dan pribadi, di mana kunci pribadi hanya dikenal oleh pemiliknya, sehingga dapat membuktikan bahwa pesan berasal dari sumber yang sah.</p>
+      <h3 style="color: white;">Non-Repudiasi </h3>
+      <p style="color: white;">Digital signature mencegah pihak yang telah mengirim pesan atau dokumen untuk kemudian menyangkal tindakan tersebut.</p>
 
       <!-- <div class="creative-footer-text">
         <p>Donec pede justo fringilla vel nec. <br>
