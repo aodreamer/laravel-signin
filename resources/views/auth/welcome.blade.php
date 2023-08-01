@@ -2,198 +2,103 @@
 
 @section('content')
 <style>
-    body {
-        margin:0;
-        padding:0;
-        font-family: sans-serif;
-        background:  #333;
+    /* Add some basic styling to the table */
+    table {
+        border-collapse: collapse;
+        width: 100%;
     }
- .container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 
-.card {
-  flex: 0 0 calc(33.33% - 40px);
-  position: relative;
-  margin: 20px;
-  background:  #333;
-}
+    /* Remove borders and add box-shadow */
+    th,
+    td {
+        padding: 12px;
+        text-align: center;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-.face {
-  /* Remove the fixed width */
-  height: 200px;
-  transition: 0.4s;
-}
+    /* Add cursor pointer on hover for clickable effect */
+    td a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        /* Remove underline */
+        text-decoration: none;
+    }
 
-.face1 {
-  position: relative;
-  background: #333;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  z-index: 1;
-  transform: translateY(100px);
-}
+    /* Add shadow on cell hover */
+    td:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-.card:hover .face1 {
-  transform: translateY(0);
-  box-shadow: inset 0 0 60px whitesmoke, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-}
+    /* Style for the text inside the table cells */
+    .cell-text {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
 
-.face1 .content {
-  opacity: 0.2;
-  transition: 0.5s;
-  text-align: center;
-}
-
-.card:hover .face1 .content {
-  opacity: 1;
-}
-
-.face1 .content i {
-  font-size: 3em;
-  color: white;
-  display: inline-block;
-}
-
-.face1 .content h3 {
-  font-size: 1em;
-  color: white;
-  text-align: center;
-}
-
-.face1 .content a {
-  transition: 0.5s;
-}
-
-.face2 {
-  position: relative;
-  background: whitesmoke;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-  transform: translateY(-100px);
-}
-
-.card:hover .face2 {
-  transform: translateY(0);
-}
-
-.face2 .content p,
-.face2 .content a {
-  font-size: 10pt;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-.face2 .content a {
-  text-decoration: none;
-  color: black;
-  box-sizing: border-box;
-  outline: 1px dashed #333;
-  padding: 10px;
-  margin: 15px 0 0;
-  display: inline-block;
-}
-
-.face2 .content a:hover {
-  background: #333;
-  color: whitesmoke;
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.text-container {
+    /* Center the content in the cells horizontally and vertically using flexbox */
+    .cell-content {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
-        height: 20vh; /* Adjust as needed */
-        color : white;
-    }
-    .text-container h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-    .text-container p {
-        font-size: 18px;
-    }
-    /* Set the image width and margin */
-    .text-container img {
-        max-width: 500px;
-        margin-top: 20px;
+        align-items: center;
+        height: 100%;
     }
 
+    /* Add spacing between the cells */
+    .cell-container {
+        margin-bottom: 20px;
+    }
 </style>
 
-<div class="text-container">
-  <h1>Hello, {{ auth()->user()->name }}!</h1>
-  <p>Welcome to our website. We are glad to have you here.</p>
-</div>
-
 <div class="container">
-  <div class="card">
-    <div class="face face1">
-      <div class="content">
-        <a href="{{ route('p12.form') }}">
-          <img src="https://i.ibb.co/8NF8S13/signature.png" alt="signature" border="0" width="75" height="75">
-        </a>
-        <h3>Upload p12</h3>
-      </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Hello, {{ auth()->user()->name }}!</h1>
+            <p>Welcome to our website. We are glad to have you here.</p>
+            <div class="cell-container">
+                <table class="table">
+                    <tr>
+                        <td class="cell-content">
+                            <a href="{{ route('p12.form') }}">
+                                <img src="https://i.ibb.co/8NF8S13/signature.png" alt="signature" border="0" width="75" height="75">
+                            </a>
+                            <div class="cell-text">Upload p12</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="cell-container">
+                <table class="table">
+                    <tr>
+                        <td class="cell-content">
+                            <a href="{{ route('upload.form') }}">
+                                <img src="https://i.ibb.co/HN6Q0sj/download-2.png" alt="download-2" border="0" width="75" height="75">
+                            </a>
+                            <div class="cell-text">Upload PDF</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="cell-container">
+                <table class="table">
+                    <tr>
+                        <td class="cell-content">
+                            <a href="{{ route('verify.upload.pdf') }}">
+                                <img src="https://i.ibb.co/9nMznVP/verified.png" alt="verified" border="0" width="75" height="75">
+                            </a>
+                            <div class="cell-text">Verify</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="https://i.postimg.cc/Ssbzm203/2807918.png" alt="Image" style="max-width: 500px;">
+        </div>
     </div>
-    <div class="face face2">
-      <div class="content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
-        </p>
-        <a href="{{ route('p12.form') }}">Read More</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="face face1">
-      <div class="content">
-        <a href="{{ route('upload.form') }}">
-          <img src="https://i.ibb.co/HN6Q0sj/download-2.png" alt="download-2" border="0" width="75" height="75">
-        </a>
-        <h3>Upload PDF</h3>
-      </div>
-    </div>
-    <div class="face face2">
-      <div class="content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
-        </p>
-        <a href="{{ route('upload.form') }}">Read More</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="face face1">
-      <div class="content">
-        <a href="{{ route('verify.upload.pdf') }}">
-          <img src="https://i.ibb.co/9nMznVP/verified.png" alt="verified" border="0" width="75" height="75">
-        </a>
-        <h3>Verify</h3>
-      </div>
-    </div>
-    <div class="face face2">
-      <div class="content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
-        </p>
-        <a href="{{ route('verify.upload.pdf') }}">Read More</a>
-      </div>
-    </div>
-  </div>
 </div>
 @endsection

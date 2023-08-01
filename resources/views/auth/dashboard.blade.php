@@ -53,19 +53,9 @@
                             {{ auth()->user()->name }} <!-- Display the user's name here -->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('user.change-password') }}">
-                                <img src="https://i.ibb.co/x1RphG0/profile.png" alt="profile" style="height: 20px; margin-right: 5px;" />
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('signout') }}">
-                                <img src="https://i.ibb.co/0Gg0Z7d/logout.png" alt="profile" style="height: 20px; margin-right: 5px;" />
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
+                            <li><a class="dropdown-item" href="{{ route('user.change-password') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('signout') }}">Logout</a></li>
+                        </ul>
                     </li>
                     @endguest
                 </ul>
