@@ -31,6 +31,9 @@
     </div>
 
 <style>
+     body {
+        background-color: #333;
+    }
     /* Add your CSS styles here */
     .flex-container {
         display: flex;

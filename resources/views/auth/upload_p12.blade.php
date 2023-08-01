@@ -87,6 +87,9 @@
     .drop-zone__input {
         display: none;
     }
+    body {
+        background-color: #333;
+    }
 </style>
 
 <script>
