@@ -1,4 +1,5 @@
 @extends('auth.dashboard')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
 <div class="container mt-5">
@@ -93,44 +94,46 @@
   }
 
   function showPasswordPopup() {
-    Swal.fire({
-      title: 'Enter Password',
-      html: '<input type="password" id="p12Password" class="swal2-input">',
-      confirmButtonText: 'Submit',
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const password = document.getElementById('p12Password').value;
-        return fetch(`{{ route('showP12Password') }}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include the CSRF token in the request headers
-          },
-          body: JSON.stringify({ password: password })
+  Swal.fire({
+    title: 'Enter Password',
+    html: '@csrf <input type="password" id="p12Password" class="swal2-input">',
+    confirmButtonText: 'Check',
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      const password = document.getElementById('p12Password').value;
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+      return fetch(`http://127.0.0.1:8000/showP12Password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({ password: password, _token: csrfToken }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.text();
         })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(response.statusText)
-            }
-            return response.json()
-          })
-          .catch(error => {
-            Swal.showValidationMessage(
-              `Request failed: ${error}`
-            )
-          })
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Pass Sertifikat',
-          text: result.value.password,
-          icon: 'success'
+        .catch(error => {
+          Swal.showValidationMessage(`Request failed: ${error}`);
         });
-      }
-    });
-  }
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    console.log(result);
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: 'Pass Sertifikat',
+        text: result.value,
+        icon: 'success',
+      });
+    }
+  });
+}
+
 
   function submitRequest() {
     Swal.fire({
