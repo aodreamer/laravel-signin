@@ -112,11 +112,15 @@
   function showPasswordPopup() {
   Swal.fire({
     title: 'Enter Password',
-    html: '@csrf <input type="password" id="p12Password" class="swal2-input">',
+    html: '@csrf <input type="password" id="p12Password" class="swal2-input" required>',
     confirmButtonText: 'Check',
     showLoaderOnConfirm: true,
     preConfirm: () => {
       const password = document.getElementById('p12Password').value;
+      console.log(password);
+      if(password==""){
+        return "Password kosong";
+      }
       const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
       return fetch(`http://127.0.0.1:8000/showP12Password`, {

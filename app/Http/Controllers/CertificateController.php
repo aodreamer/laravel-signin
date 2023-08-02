@@ -65,7 +65,9 @@ class CertificateController extends Controller
 
     $user = Auth::user();
     $certificate = Certificate::where('user_id', $user->id)->first();
-
+    if($request->input('password')==""){
+        return "Password kosong!";
+    }
     if ($certificate) {
         $decryptedPassword = Crypt::decryptString($certificate->pass);
         if (password_verify($request->input('password'), $user->password)) {
