@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Daftar File</h2>
+        <h2 class="white-text">Daftar File</h2>
         <div class="row">
             @foreach ($files as $file)
                 <div class="col-md-4">
@@ -48,4 +48,15 @@
         font-weight: bold;
 
     }
+    body {
+        margin:0;
+        padding:0;
+        font-family: sans-serif;
+        background: linear-gradient(#333, #333);
+    }
+    .white-text {
+  color: white;
+  font-size: 24px; /* Optional: You can adjust the font size as per your requirement */
+}
+
 </style>
