@@ -39,7 +39,7 @@
 
     .login-box .user-box input {
         width: 100%;
-        padding: 10px 0;
+        padding: 10px 10px;
         font-size: 16px;
         color: #fff;
         margin-bottom: 30px;
@@ -206,7 +206,7 @@
                             </div>
                         </div>
                         <div class="d-grid mx-auto">
-                            <button type="submit" class="btn btn-dark btn-block">Signin</button>
+                            <button type="submit" class="btn btn-dark btn-block">Login</button>
                         </div>
                     </form>
                 </div>

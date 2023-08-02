@@ -5,10 +5,9 @@
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
-    <h2>Sertifikat</h2>
     @if ($certificate)
         <p>Nama Sertifikat: {{$certificate->p12_name}}</p>
-        <a href="{{ route('cert.download') }}" class="btn btn-primary">Download Sertifikat</a>
+        <button class="btn btn-primary" onclick="showCertificate()">Download Sertifikat</button>
     @else
         <p>Anda tidak memiliki sertifikat.</p>
     @endif
@@ -22,14 +21,7 @@
         Pass Sertifikat: {{ session('password') }}
     </div>
     @endif
-    <form method="POST" action="{{ route('showP12Password') }}">
-        @csrf
-        <div class="mb-3">
-            <label for="password" class="form-label">Password Akun</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Lihat Password P12</button>
-    </form>
+    <button class="btn btn-primary" onclick="showPasswordPopup()">Lihat Password P12</button>
 </div>
 
 <div class="container mt-5">
@@ -45,7 +37,7 @@
             <label for="reason">Alasan Pengajuan</label>
             <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Ajukan Perubahan</button>
+        <button type="button" class="btn btn-primary" onclick="submitRequest()">Ajukan Perubahan</button>
     </form>
 </div>
 
@@ -77,4 +69,84 @@
     @endif
 </div>
 @endif
+
+<!-- SweetAlert2 Library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- JavaScript Code for SweetAlert2 Pop-ups -->
+<script>
+  function showCertificate() {
+    Swal.fire({
+      title: 'Download Sertifikat',
+      text: 'Are you sure you want to download the certificate?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, download it!',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "{{ route('cert.download') }}";
+      }
+    });
+  }
+
+  function showPasswordPopup() {
+    Swal.fire({
+      title: 'Enter Password',
+      html: '<input type="password" id="p12Password" class="swal2-input">',
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const password = document.getElementById('p12Password').value;
+        return fetch(`{{ route('showP12Password') }}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include the CSRF token in the request headers
+          },
+          body: JSON.stringify({ password: password })
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText)
+            }
+            return response.json()
+          })
+          .catch(error => {
+            Swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Pass Sertifikat',
+          text: result.value.password,
+          icon: 'success'
+        });
+      }
+    });
+  }
+
+  function submitRequest() {
+    Swal.fire({
+      title: 'Pengajuan Perubahan Sertifikat',
+      text: 'Are you sure you want to submit the request?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit it!',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.querySelector("form").submit();
+      }
+    });
+  }
+</script>
 @endsection

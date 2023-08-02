@@ -14,7 +14,10 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
+.centered {
+  display: flex;
+  justify-content: center;
+}
 .card {
   flex: 0 0 calc(33.33% - 40px);
   position: relative;
@@ -151,9 +154,11 @@
     <div class="face face2">
       <div class="content">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+          Upload your P12 here, we will save it and make it available 24/7
         </p>
-        <a href="{{ route('p12.form') }}">Read More</a>
+        <div class="centered">
+          <a href="{{ route('p12.form') }}">Upload p12</a>
+        </div>
       </div>
     </div>
   </div>
@@ -170,9 +175,11 @@
     <div class="face face2">
       <div class="content">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+        Upload your PDF here, we will save it and make it available 24/7
         </p>
-        <a href="{{ route('upload.form') }}">Read More</a>
+        <div class="centered">
+          <a href="{{ route('upload.form') }}">Upload PDF</a>
+        </div>
       </div>
     </div>
   </div>
@@ -189,9 +196,11 @@
     <div class="face face2">
       <div class="content">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?
+        Upload your PDF here, we will verify the validity of your
         </p>
-        <a href="{{ route('verify.upload.pdf') }}">Read More</a>
+        <div class="centered">
+          <a href="{{ route('verify.upload.pdf') }}">Verify</a>
+        </div>
       </div>
     </div>
   </div>
