@@ -8,21 +8,24 @@
         font-family: sans-serif;
         background:  #333;
     }
- .container {
+    .container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Remove the 'justify-content: space-between' rule */
 }
 .centered {
   display: flex;
   justify-content: center;
 }
+
+
 .card {
-  flex: 0 0 calc(33.33% - 40px);
+  flex: 0 0 calc(50% - 40px); /* Change the width to 50% to create a 2x2 grid */
   position: relative;
   margin: 20px;
-  background:  #333;
+  background: #333;
+  /* Add this rule to remove the border */
+  border: none;
 }
 
 .face {
@@ -145,19 +148,19 @@
   <div class="card">
     <div class="face face1">
       <div class="content">
-        <a href="{{ route('p12.form') }}">
+        <a href="{{ route('jdih.index') }}">
           <img src="https://i.ibb.co/8NF8S13/signature.png" alt="signature" border="0" width="75" height="75">
         </a>
-        <h3>Upload p12</h3>
+        <h3>JDIH</h3>
       </div>
     </div>
     <div class="face face2">
       <div class="content">
         <p>
-          Upload your P12 here, we will save it and make it available 24/7
+          JDIH, anytime you need to access our repository for our documen, you can access it 24/7
         </p>
         <div class="centered">
-          <a href="{{ route('p12.form') }}">Upload p12</a>
+          <a href="{{ route('jdih.index') }}">JDIH</a>
         </div>
       </div>
     </div>
@@ -200,6 +203,26 @@
         </p>
         <div class="centered">
           <a href="{{ route('verify.upload.pdf') }}">Verify</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="face face1">
+      <div class="content">
+        <a href="{{ route('cert.show') }}">
+          <img src="https://i.ibb.co/KzxKjR2/digital-signature.png" alt="signature" border="0" width="75" height="75">
+        </a>
+        <h3>Certificate</h3>
+      </div>
+    </div>
+    <div class="face face2">
+      <div class="content">
+        <p>
+          Certificate, you can download your certificate 24/7
+        </p>
+        <div class="centered">
+          <a href="{{ route('cert.show') }}">Certificate</a>
         </div>
       </div>
     </div>

@@ -3,6 +3,10 @@
 @section('content')
 <style>
     /* Add the provided CSS styles here */
+    .remember-me label {
+    color: white;
+    }
+
     html {
         height: 100%;
     }
@@ -201,7 +205,10 @@
                         <div class="form-group mb-3">
                             <div class="checkbox">
                                 <label>
-                                    <input color:white; type="checkbox" name="remember" > Remember Me
+                                    <div class="remember-me">
+                                        <input type="checkbox" name="remember" id="remember-checkbox">
+                                        <label for="remember-checkbox">Remember Me</label>
+                                    </div>
                                 </label>
                             </div>
                         </div>

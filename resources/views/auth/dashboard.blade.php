@@ -25,12 +25,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('p12.form') }}">Upload p12</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('upload.form') }}">Upload PDF</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cert.show') }}">Certificate</a>
-                        </li>
+                        </li> -->
                         @if(auth()->user()->isAdmin())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.requests') }}">Admin</a>
