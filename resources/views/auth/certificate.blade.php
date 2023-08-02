@@ -101,7 +101,6 @@
     showLoaderOnConfirm: true,
     preConfirm: () => {
       const password = document.getElementById('p12Password').value;
-      console.log(password);
       if(password==""){
         return "Password kosong";
       }
@@ -127,7 +126,6 @@
     },
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
-    console.log(result);
     if (result.isConfirmed) {
       Swal.fire({
         title: 'Pass Sertifikat',

@@ -73,10 +73,12 @@ class CertificateController extends Controller
         if (password_verify($request->input('password'), $user->password)) {
             return $decryptedPassword;
         } else {
-            return redirect('cert.show')->with('error', 'Password akun tidak sesuai.');
+            redirect('/certificate')->with('error', 'Password akun tidak sesuai.');
+            return "Password akun tidak sesuai";
         }
     } else {
-        return redirect('cert.show')->with('error', 'Anda tidak memiliki sertifikat.');
+        redirect('/certificate')->with('error', 'Anda tidak memiliki sertifikat.');
+        return 'Anda tidak memiliki sertifikat.';
     }
 }
     
