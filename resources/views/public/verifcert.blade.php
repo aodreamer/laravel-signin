@@ -1,15 +1,102 @@
-<!-- resources/views/upload.blade.php -->
+@extends('auth.dashboard')
+@section('content')
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Verifikasi sertifikat anda</h2>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('verify.cert') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="flex-container">
+                        <div class="drop-zone" id="dropZone">
+                            <span class="drop-zone__prompt">
+                                <div class="image-container">
+                                    <img src="https://play-lh.googleusercontent.com/BkRfMfIRPR9hUnmIYGDgHHKjow-g18-ouP6B2ko__VnyUHSi1spcc78UtZ4sVUtBH4g" alt="Image" style="width: 150px;">
+                                </div>
+                                Unggah dokumen pdf
+                            </span>
+                            <input type="file" class="drop-zone__input" id="pdf_file" name="pdf_file">
+                        </div>
+                    </div>
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Upload PDF</title>
-</head>
-<body>
-    <form action="{{ route('verify.cert') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="pdf_file">
-        <button type="submit">Upload</button>
-    </form>
-</body>
-</html>
+<style>
+     body {
+        background-color: #333;
+    }
+    /* Add your CSS styles here */
+    .flex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow containers to wrap to the next line if necessary */
+    }
+
+    .image-container {
+        margin-right: 20px; /* Add spacing between the containers */
+    }
+
+    .drop-zone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px; /* Adjust the height as desired */
+        width: 100%; /* Set the width to 100% to fill the container */
+        border: 2px dashed #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .drop-zone__prompt {
+        font-size: 24px;
+        color: #aaa;
+        text-align: center; /* Center the text horizontally */
+        margin-bottom: 20px; /* Add some bottom margin to separate the text and the input */
+        display: flex; /* Add flex to align the logo and text horizontally */
+        align-items: center; /* Center the items horizontally */
+    }
+
+    .drop-zone__prompt img {
+        vertical-align: middle; /* Adjust the alignment of the logo with text */
+    }
+
+    .drop-zone__input {
+        display: none;
+    }
+</style>
+
+<script>
+    // Add your JavaScript code here
+    const dropZone = document.querySelector('.drop-zone');
+    const input = document.getElementById('pdf_file');
+    const checkBtn = document.getElementById('checkBtn');
+
+    dropZone.addEventListener('click', () => {
+        input.click();
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone--over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone--over');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone--over');
+        const file = e.dataTransfer.files[0];
+        input.files = e.dataTransfer.files; // Assign the dropped file to the input
+    });
+</script>
+@endsection
