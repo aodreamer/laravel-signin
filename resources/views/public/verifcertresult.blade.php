@@ -12,7 +12,8 @@
         <script>
             // Show the pop-up alert with JSON data
             Swal.fire({
-=               html: '<pre>' + JSON.stringify(@json($data), null, 2) + '</pre>',
+                title: 'JSON Data',
+                html: '<pre>' + JSON.stringify(@json($data), null, 2) + '</pre>',
                 icon: 'info',
                 confirmButtonText: 'OK'
             });
