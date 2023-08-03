@@ -78,3 +78,6 @@ Route::get('/jdih/download/{id}', [App\Http\Controllers\Controller::class, 'down
 
 Route::get('/check', [VerifyController::class, 'showCheckForm'])->name('verify.check.form');
 Route::post('/check', [VerifyController::class, 'checkPdf'])->name('verify.check.pdf');
+
+Route::get('/verifycert', [VerifyController::class, 'showVerifCert'])->name('verify.cert.form');
+Route::post('/verifycert', [VerifyController::class, 'uploadSigned'])->name('verify.cert');
