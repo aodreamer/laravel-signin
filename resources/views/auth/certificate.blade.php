@@ -157,7 +157,9 @@
     <div class="container mt-5">
         @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
+        @elseif($certificate==null)
+            <h1>Test</h1>
+        @else
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card">
@@ -205,7 +207,6 @@
                 </div>
             </div>
         </div>
-        @if ($certificate)
         <div class="row mt-5">
     <div class="col-md-12 d-flex justify-content-center">
         <h2 style="color: white;">History Pengajuan</h2>
