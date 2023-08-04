@@ -151,14 +151,228 @@
 
     </style>
     </head>
-
-
 <body>
     <div class="container mt-5">
         @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
         @elseif($certificate==null)
-            <h1>Test</h1>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <form>
+            <fieldset class="username enable">
+                <div class="icon left"><i class="fas fa-user"></i></div>
+                <input type="text" name="username" placeholder="Username">
+                <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
+            </fieldset>
+                <fieldset class="email">
+                    <div class="icon left"><i class="fas fa-envelope"></i></div>
+                    <input type="email" name="email" placeholder="Email">
+                    <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
+                </fieldset>
+                <fieldset class="password">
+                    <div class="icon left"><i class="fas fa-lock"></i></div>
+                    <input type="password" name="password" placeholder="Password">
+                    <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
+                </fieldset>
+                <fieldset class="thanks">
+                    <div class="icon left"><i class="fas fa-heart"></i></div>
+                    <p>Thanks for your time</p>
+                    <div class="icon right"><i class="fas fa-heart"></i></div>
+                </fieldset>
+        </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            // Select all the right button icons
+            var rightButtons = document.querySelectorAll('.icon.right.button');
+
+            // Add a click event listener to each right button
+            rightButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var currentFieldset = button.closest('fieldset');
+                    var nextFieldset = currentFieldset.nextElementSibling;
+
+                    if (nextFieldset) {
+                        currentFieldset.classList.remove('enable');
+                        currentFieldset.classList.add('disable');
+                        nextFieldset.classList.add('enable');
+                        nextFieldset.querySelector('input').focus();
+                    }
+                });
+            });
+        });
+
+            document.addEventListener("DOMContentLoaded", function () {
+            function init() {
+                var ul = document.querySelector('ul.items');
+
+                for (var i = 0; i < count; i++) {
+                var li = document.createElement("li");
+                ul.appendChild(li);
+                }
+
+                ul.firstChild.classList.add('active');
+            }
+
+            function next(target) {
+                var input = target.previousElementSibling;
+                if (input.value === '') {
+                document.body.classList.add('error');
+                } else {
+                document.body.classList.remove('error');
+                var enable = document.querySelector('form fieldset.enable'),
+                    nextEnable = enable.nextElementSibling;
+                enable.classList.remove('enable');
+                enable.classList.add('disable');
+                nextEnable.classList.add('enable');
+                var active = document.querySelector('ul.items li.active'),
+                    nextActive = active.nextElementSibling;
+                active.classList.remove('active');
+                nextActive.classList.add('active');
+                }
+            }
+
+            function keyDown(event) {
+                var key = event.keyCode,
+                    target = document.querySelector('fieldset.enable .button');
+                if (key == 13 || key == 9) next(target);
+            }
+
+            var body = document.querySelector('body'),
+                form = document.querySelector('form'),
+                count = form.querySelectorAll('fieldset').length;
+
+            window.onload = init;
+
+            document.body.onmouseup = function (event) {
+                var target = event.target || event.toElement;
+                if (target.classList.contains("button")) next(target);
+            };
+
+            document.addEventListener("keydown", keyDown, false);
+            });
+            </script>
+
+            <style>
+                body, form, form fieldset, body.error fieldset {
+                    background-color: #333;
+                }
+                h1, h2 {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                font-family: sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                }
+                h1 {
+                top: 24px;
+                color: hsl(0, 0, 100);
+                font-size: 12px;
+                }
+                h2 {
+                top: 44px;
+                color: hsl(0, 0, 100);
+                font-size: 10px;
+                opacity: 0.7;
+                }
+                form {
+                position: absolute;
+                width: 300px;
+                height: 60px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                }
+                form fieldset {
+                position: absolute;
+                width: 400px;
+                height: 60px;
+                background: hsl(0, 0, 100);
+                border-radius: 3px;
+                opacity: 0;
+                transform: scale(0.2);
+                transition: all 0.4s ease-in-out;
+                }
+                form fieldset input, form fieldset p {
+                display: inline-block;
+                width: 300px;
+                margin-left: 50px;
+                color: hsl(0, 0, 20);
+                font-size: 16px;
+                letter-spacing: 1px;
+                }
+                form fieldset p {
+                margin-top: 22px;
+                text-align: center;
+                }
+                form fieldset input {
+                height: 40px;
+                margin-top: 8px;
+                border: none;
+                outline: none;
+                }
+                form fieldset .icon {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                top: 15px;
+                transition: all 0.4s ease;
+                }
+                form fieldset .icon i {
+                position: absolute;
+                display: block;
+                }
+                form fieldset .icon.left {
+                left: 10px;
+                }
+                form fieldset .icon.right {
+                right: 10px;
+                cursor: pointer;
+                }
+                form fieldset .icon.button:hover {
+                background: hsl(0, 0, 95);
+                border-radius: 3px;
+                transition: all 0.4s ease;
+                }
+                form fieldset.enable {
+                z-index: 1;
+                opacity: 1;
+                transition: all 0.5s ease-out 0.2s;
+                transform: scale(1);
+                }
+                form fieldset.disable {
+                opacity: 0;
+                transition: all 0.3s ease-in;
+                transform: translateY(120px) scale(0.9);
+                }
+                body.error fieldset {
+                transform-origin: 50% 100%;
+                }
+                @keyframes enable {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.2);
+                }
+                60% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                }
+                @keyframes error {
+                0%, 50%, 100% {
+                    transform: rotate(0deg);
+                }
+                25% {
+                    transform: rotate(-3deg);
+                }
+                75% {
+                    transform: rotate(3deg);
+                }
+                }
+            </style>
         @else
         <div class="row justify-content-center">
             <div class="col-md-4">
