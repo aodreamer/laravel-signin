@@ -13,11 +13,11 @@
                     </div>
                 @endif
                 @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <form method="POST" action="{{ route('upload.pdf') }}" enctype="multipart/form-data">
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('upload.pdf') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="flex-container">
                         <div class="drop-zone" id="dropZone">
@@ -32,6 +32,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Upload</button>
                 </form>
+                <div class="progress mt-3">
+                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,29 +87,65 @@
         }
     </style>
 
-    <script>
-        // Add your JavaScript code here
-        const dropZone = document.querySelector('.drop-zone');
-        const input = document.getElementById('pdf_file');
+<script>
+    // Add your JavaScript code here
+    const dropZone = document.querySelector('.drop-zone');
+    const input = document.getElementById('pdf_file');
+    const progressBar = document.querySelector('.progress-bar');
 
-        dropZone.addEventListener('click', () => {
-            input.click();
-        });
+    dropZone.addEventListener('click', () => {
+        input.click();
+    });
 
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('drop-zone--over');
-        });
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone--over');
+    });
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('drop-zone--over');
-        });
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone--over');
+    });
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('drop-zone--over');
-            const file = e.dataTransfer.files[0];
-            input.files = e.dataTransfer.files; // Assign the dropped file to the input
-        });
-    </script>
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone--over');
+        const file = e.dataTransfer.files[0];
+        input.files = e.dataTransfer.files; // Assign the dropped file to the input
+    });
+
+    // Handle file upload using XMLHttpRequest
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('pdf_file', file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '{{ route('upload.pdf') }}', true);
+
+            xhr.upload.onprogress = function(event) {
+                const progress = (event.loaded / event.total) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressBar.setAttribute('aria-valuenow', progress);
+            };
+
+            xhr.onload = function() {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    alert('File uploaded successfully.');
+                } else {
+                    alert('File upload failed.');
+                }
+            };
+
+            xhr.onerror = function() {
+                alert('An error occurred during file upload.');
+            };
+
+            xhr.send(formData);
+        }
+    });
+</script>
+
+
 @endsection
