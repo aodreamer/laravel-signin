@@ -156,7 +156,6 @@
         @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-        @if ($certificate)
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card">
@@ -204,8 +203,6 @@
                 </div>
             </div>
         </div>
-        @endif
-
         @if ($certificate)
         <div class="row mt-5">
     <div class="col-md-12 d-flex justify-content-center">
@@ -251,7 +248,7 @@
 <!-- JavaScript Code for SweetAlert2 Pop-ups -->
 <script>
     function showCertificate() {
-        const certificateName = "{{ $certificate->p12_name }}";
+        const certificateName = "{{ isset($certificate->p12_name) ? $certificate->p12_name : 'tidak ada sertifikat' }}";
         Swal.fire({
             title: 'Download Sertifikat',
             html: `Nama Sertifikat: ${certificateName}<br>Are you sure you want to download the certificate?`,
