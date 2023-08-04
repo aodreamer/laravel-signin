@@ -200,17 +200,6 @@
                             @if ($errors->has('password'))
                             <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
-
-                        </div>
-                        <div class="form-group mb-3">
-                            <div class="checkbox">
-                                <label>
-                                    <div class="remember-me">
-                                        <input type="checkbox" name="remember" id="remember-checkbox">
-                                        <label for="remember-checkbox">Remember Me</label>
-                                    </div>
-                                </label>
-                            </div>
                         </div>
                         <div class="d-grid mx-auto">
                             <button type="submit" class="btn btn-dark btn-block">Login</button>
