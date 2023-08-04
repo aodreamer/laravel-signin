@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('auth.dashboard')
 
+@section('content')
+
+<!DOCTYPE html>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Hover Effects with Buttons</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <style>
+
+<style>
         body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
             background: #333;
-            display: flex;
             justify-content: center;
             align-items: center;
             font-family: consolas;
@@ -21,11 +22,11 @@
 
         .container {
             width: 100%;
-            max-width: 1000px;
-            position: relative;
+            position: center;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
 
         .container .card {
@@ -149,7 +150,8 @@
         }
 
     </style>
-</head>
+    </head>
+
 
 <body>
     <div class="container mt-5">
@@ -352,3 +354,4 @@
 </body>
 
 </html>
+@endsection
