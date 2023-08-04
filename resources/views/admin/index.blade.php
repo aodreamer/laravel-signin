@@ -4,8 +4,8 @@
 <style>
     /* Custom CSS for button width and margin */
     .btn-action {
-        width: 120px;
-        margin-bottom: 10px;
+        width: 80px;
+        margin-right: 10px;
     }
 
     /* Custom CSS for status background colors */
@@ -65,23 +65,27 @@
                         <td>{{ $request->updated_at->format('Y-m-d') }}</td>
                         <td>
                             @if ($request->status === 'pending')
-                            <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Progress']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success btn-action">Accept</button>
-                            </form>
-                            <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Rejected']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-action">Reject</button>
-                            </form>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Progress']) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-action">Accept</button>
+                                </form>
+                                <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Rejected']) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-action">Reject</button>
+                                </form>
+                            </div>
                             @elseif ($request->status === 'Progress')
-                            <form action="{{ route('reupload.certificate.form', ['id' => $request->user->id]) }}" method="GET">
-                                @csrf
-                                <button type="submit" class="btn btn-primary btn-action">Upload</button>
-                            </form>
-                            <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Rejected']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-action">Reject</button>
-                            </form>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('reupload.certificate.form', ['id' => $request->user->id]) }}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-action">Upload</button>
+                                </form>
+                                <form action="{{ route('changeStatus.request', ['request' => $request->id, 'status' => 'Rejected']) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-action">Reject</button>
+                                </form>
+                            </div>
                             @endif
                         </td>
                     </tr>
@@ -91,7 +95,6 @@
         </div>
     @endif
 </div>
-
 
 <div class="container mt-4">
     <h2>Daftar File</h2>
@@ -109,19 +112,20 @@
                 @foreach ($files as $file)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $file->filename }}</td>
+                    <td><a href="{{ route('jdih.download', $file->id) }}">{{ $file->filename }}</a></td>
                     <td>{{ $file->author->name }}</td>
                     <td>
-                        <a href="{{ route('jdih.download', $file->id) }}" class="btn btn-primary">Unduh</a>
-                        <form action="{{ route('delete.file', ['fileId' => $file->id]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus File</button>
-                        </form>
-                        <form action="{{ route('update.file.form', ['fileId' => $file->id]) }}" method="GET">
-                            @csrf
-                            <button type="submit" class="btn btn-warning">Update File</button>
-                        </form>
+                        <div class="btn-group" role="group">
+                            <form action="{{ route('delete.file', ['fileId' => $file->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-action">Hapus</button>
+                            </form>
+                            <form action="{{ route('update.file.form', ['fileId' => $file->id]) }}" method="GET">
+                                @csrf
+                                <button type="submit" class="btn btn-warning btn-action">Update</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
