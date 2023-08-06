@@ -44,8 +44,8 @@
 
             // Show the pop-up alert with JSON data in a nested table format
             Swal.fire({
-                title: 'JSON Data',
-                html: jsonToTable(@json($data)),
+                title: 'Result',
+                html: "@if($isUploaded)<a>File terkonfirmasi resmi</a>@else <a>File belum/tidak terkonfirmasi resmi</a> @endif" + jsonToTable(@json($data)),
                 icon: 'info',
                 confirmButtonText: 'OK'
             });

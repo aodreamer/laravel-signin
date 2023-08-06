@@ -33,9 +33,9 @@ class VerifyController extends Controller
 
         if ($existingFile) {
             // File sudah terverifikasi
-            return back()->with('message', 'File terverifikasi');
+            return True;
         } else {
-            return back()->with('message', 'File belum/tidak terverifikasi');
+            return False;
         }
     }
 
@@ -44,6 +44,7 @@ class VerifyController extends Controller
         return view('public.check', compact('files'));
     }
 
+    //ini ga guna
     public function checkPdf(Request $request)
     {
         $request->validate([
@@ -77,13 +78,16 @@ class VerifyController extends Controller
         $file = $request->file('pdf_file');
         $pdfContents = file_get_contents($file->getPathname());
         
+        
         try {
+            $isUploaded = $this->uploadPdf($request);
+            
             $response = Http::attach('file', $pdfContents, $file->getClientOriginalName())
                 ->post('http://127.0.0.1:5000/verify_pdf_signature'); // Ganti dengan URL endpoint yang sesuai
 
             $data = $response->json();
             // Tampilkan atau proses data response sesuai kebutuhan
-            return view('public.verifcertresult', ['data' => $data]);
+            return view('public.verifcertresult', compact('data', 'isUploaded'));
         } catch (RequestException $e) {
             // Tangani kesalahan jika ada
             return back()->withErrors('Error uploading and processing PDF.');
