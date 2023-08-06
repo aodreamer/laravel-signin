@@ -190,7 +190,7 @@
   <div class="card">
     <div class="face face1">
       <div class="content">
-        <a href="{{ route('verify.upload.pdf') }}">
+        <a href="{{ route('verify.cert.form') }}">
           <img src="https://i.ibb.co/9nMznVP/verified.png" alt="verified" border="0" width="75" height="75">
         </a>
         <h3>Verify</h3>
@@ -202,7 +202,7 @@
         Upload your PDF here, we will verify the validity of your
         </p>
         <div class="centered">
-          <a href="{{ route('verify.upload.pdf') }}">Verify</a>
+          <a href="{{ route('verify.cert.form') }}">Verify</a>
         </div>
       </div>
     </div>
