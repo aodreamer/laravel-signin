@@ -40,7 +40,7 @@
                             </div>
                             Drag and drop your P12 file here or click to select.
                         </span>
-                        <input type="file" class="drop-zone__input" id="p12_file" name="p12_file">
+                        <input type="file" class="drop-zone__input" id="p12_file" name="p12_file" accept=".p12">
                     </div>
                 </div>
                 <div class="form-group mb-3">

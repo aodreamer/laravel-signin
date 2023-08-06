@@ -5,374 +5,242 @@
 <!DOCTYPE html>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+            body {
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                background: #333;
+                justify-content: center;
+                align-items: center;
+                font-family: consolas;
+            }
 
-<style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: #333;
-            justify-content: center;
-            align-items: center;
-            font-family: consolas;
-        }
+            .container {
+                width: 100%;
+                position: center;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
 
-        .container {
-            width: 100%;
-            position: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
+            .container .card {
+                position: relative;
+                cursor: pointer;
+            }
 
-        .container .card {
-            position: relative;
-            cursor: pointer;
-        }
+            .container .card .face {
+                width: 300px;
+                height: 200px;
+                transition: 0.5s;
+            }
 
-        .container .card .face {
-            width: 300px;
-            height: 200px;
-            transition: 0.5s;
-        }
+            .container .card .face.face1 {
+                position: relative;
+                background: #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+                transform: translateY(100px);
+            }
 
-        .container .card .face.face1 {
-            position: relative;
-            background: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            transform: translateY(100px);
-        }
+            .container .card:hover .face.face1 {
+                background: #ff0057;
+                transform: translateY(0);
+            }
 
-        .container .card:hover .face.face1 {
-            background: #ff0057;
-            transform: translateY(0);
-        }
+            .container .card .face.face1 .content {
+                opacity: 0.2;
+                transition: 0.5s;
+            }
 
-        .container .card .face.face1 .content {
-            opacity: 0.2;
-            transition: 0.5s;
-        }
+            .container .card:hover .face.face1 .content {
+                opacity: 1;
+            }
 
-        .container .card:hover .face.face1 .content {
-            opacity: 1;
-        }
+            .container .card .face.face1 .content img {
+                max-width: 100px;
+            }
 
-        .container .card .face.face1 .content img {
-            max-width: 100px;
-        }
+            .container .card .face.face1 .content h3 {
+                margin: 10px 0 0;
+                padding: 0;
+                color: #fff;
+                text-align: center;
+                font-size: 1.5em;
+            }
 
-        .container .card .face.face1 .content h3 {
-            margin: 10px 0 0;
-            padding: 0;
-            color: #fff;
-            text-align: center;
-            font-size: 1.5em;
-        }
+            .container .card .face.face2 {
+                position: relative;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                box-sizing: border-box;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+                transform: translateY(-100px);
+            }
 
-        .container .card .face.face2 {
-            position: relative;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            transform: translateY(-100px);
-        }
+            .container .card:hover .face.face2 {
+                transform: translateY(0);
+            }
 
-        .container .card:hover .face.face2 {
-            transform: translateY(0);
-        }
+            .container .card .face.face2 .content p {
+                margin: 0;
+                padding: 0;
+            }
 
-        .container .card .face.face2 .content p {
-            margin: 0;
-            padding: 0;
-        }
+            .container .card .face.face2 .content a {
+                margin: 15px 0 0;
+                display: inline-block;
+                text-decoration: none;
+                font-weight: 900;
+                color: #333;
+                padding: 5px;
+                border: 1px solid #333;
+            }
 
-        .container .card .face.face2 .content a {
-            margin: 15px 0 0;
-            display: inline-block;
-            text-decoration: none;
-            font-weight: 900;
-            color: #333;
-            padding: 5px;
-            border: 1px solid #333;
-        }
+            .container .card .face.face2 .content a:hover {
+                background: #333;
+                color: #fff;
+            }
 
-        .container .card .face.face2 .content a:hover {
-            background: #333;
-            color: #fff;
-        }
+            .container .table-responsive {
+                margin: 0 auto; /* Center the table */
+                width: 100%; /* Ensure it takes the full width */
+            }
 
-        .container .table-responsive {
-            margin: 0 auto; /* Center the table */
-            width: 100%; /* Ensure it takes the full width */
-        }
+            .container .table-striped thead {
+                color: #fff; /* Set the text color of table header to white */
+                border-color: white; /* Set the border color of table header to white */
+            }
 
-        .container .table-striped thead {
-            color: #fff; /* Set the text color of table header to white */
-            border-color: white; /* Set the border color of table header to white */
-        }
+            .container .table-striped tbody tr {
+                color: #fff; /* Set the text color of table rows to white */
+            }
 
-        .container .table-striped tbody tr {
-            color: #fff; /* Set the text color of table rows to white */
-        }
+            .container .table-striped tbody tr td {
+                border-color: white; /* Set the border color of table cells to white */
+            }
+            .container .table-responsive h2 {
+                color: #fff; /* Set the text color of the heading to white */
+            }
 
-        .container .table-striped tbody tr td {
-            border-color: white; /* Set the border color of table cells to white */
-        }
-        .container .table-responsive h2 {
-            color: #fff; /* Set the text color of the heading to white */
-        }
+            .container .table-striped thead th {
+                color: #fff; /* Set the text color of the table header to white */
+                border-top: 1px solid #fff; /* Set the top border of the table header to white */
+                border-bottom: 1px solid #fff; /* Set the bottom border of the table header to white */
+            }
 
-        .container .table-striped thead th {
-            color: #fff; /* Set the text color of the table header to white */
-            border-top: 1px solid #fff; /* Set the top border of the table header to white */
-            border-bottom: 1px solid #fff; /* Set the bottom border of the table header to white */
-        }
+            .container .table-striped tbody td {
+                color: #fff; /* Set the text color of the table data cells to white */
+                border-top: 1px solid #fff; /* Set the top border of the table data cells to white */
+                border-bottom: 1px solid #fff; /* Set the bottom border of the table data cells to white */
+            }
 
-        .container .table-striped tbody td {
-            color: #fff; /* Set the text color of the table data cells to white */
-            border-top: 1px solid #fff; /* Set the top border of the table data cells to white */
-            border-bottom: 1px solid #fff; /* Set the bottom border of the table data cells to white */
-        }
-
-        .container .table-responsive h2 {
-            color: #fff; /* Set the text color to white */
-        }
-
-    </style>
+            .container .table-responsive h2 {
+                color: #fff; /* Set the text color to white */
+            }
+        </style>
     </head>
-<body>
+    <body>
     <div class="container mt-5">
-        @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-        @elseif($certificate==null)
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <form>
-            <fieldset class="username enable">
-                <div class="icon left"><i class="fas fa-user"></i></div>
-                <input type="text" name="username" placeholder="Username">
-                <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
-            </fieldset>
-                <fieldset class="email">
-                    <div class="icon left"><i class="fas fa-envelope"></i></div>
-                    <input type="email" name="email" placeholder="Email">
-                    <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
-                </fieldset>
-                <fieldset class="password">
-                    <div class="icon left"><i class="fas fa-lock"></i></div>
-                    <input type="password" name="password" placeholder="Password">
-                    <div class="icon right button"><i class="fas fa-arrow-right"></i></div>
-                </fieldset>
-                <fieldset class="thanks">
-                    <div class="icon left"><i class="fas fa-heart"></i></div>
-                    <p>Thanks for your time</p>
-                    <div class="icon right"><i class="fas fa-heart"></i></div>
-                </fieldset>
+    @if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+    @elseif($certificate==null)
+    <div class="card">
+    <div class="card-header">
+        <h4>Request P12 Form</h4>
+    </div>
+    <div class="card-body">
+        <form class="well form-horizontal" action="" method="post" enctype="multipart/form-data" id="upload_form">
+            @csrf
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Country:</label>
+                <div class="col-md-8">
+                    <input type="text" name="Country" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Province:</label>
+                <div class="col-md-8">
+                    <input type="text" name="Province" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">City:</label>
+                <div class="col-md-8">
+                    <input type="text" name="City" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Organization:</label>
+                <div class="col-md-8">
+                    <input type="text" name="Organization" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Organizational Unit:</label>
+                <div class="col-md-8">
+                    <input type="text" name="Organizational_Unit" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Common Name:</label>
+                <div class="col-md-8">
+                    <input type="text" name="Common_Name" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Email:</label>
+                <div class="col-md-8">
+                    <input type="email" name="Email" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 control-label">Password:</label>
+                <div class="col-md-8">
+                    <input type="password" name="Password" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-8 offset-md-4">
+                    <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+                </div>
+            </div>
         </form>
+        <div id="success_message" class="alert alert-success" role="alert" style="display: none;">
+            Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for submitting the form!
+        </div>
+    </div>
+</div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            // Select all the right button icons
-            var rightButtons = document.querySelectorAll('.icon.right.button');
-
-            // Add a click event listener to each right button
-            rightButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var currentFieldset = button.closest('fieldset');
-                    var nextFieldset = currentFieldset.nextElementSibling;
-
-                    if (nextFieldset) {
-                        currentFieldset.classList.remove('enable');
-                        currentFieldset.classList.add('disable');
-                        nextFieldset.classList.add('enable');
-                        nextFieldset.querySelector('input').focus();
-                    }
-                });
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#upload_form').bootstrapValidator({
+                // Your validation configurations here
+            })
+            .on('success.form.bv', function(e) {
+                $('#success_message').slideDown({ opacity: "show" }, "slow");
+                e.preventDefault();
+                var $form = $(e.target);
+                var bv = $form.data('bootstrapValidator');
+                $.post($form.attr('action'), $form.serialize(), function(result) {
+                    console.log(result);
+                }, 'json');
             });
         });
+    </script>
+</div>
 
-            document.addEventListener("DOMContentLoaded", function () {
-            function init() {
-                var ul = document.querySelector('ul.items');
-
-                for (var i = 0; i < count; i++) {
-                var li = document.createElement("li");
-                ul.appendChild(li);
-                }
-
-                ul.firstChild.classList.add('active');
-            }
-
-            function next(target) {
-                var input = target.previousElementSibling;
-                if (input.value === '') {
-                document.body.classList.add('error');
-                } else {
-                document.body.classList.remove('error');
-                var enable = document.querySelector('form fieldset.enable'),
-                    nextEnable = enable.nextElementSibling;
-                enable.classList.remove('enable');
-                enable.classList.add('disable');
-                nextEnable.classList.add('enable');
-                var active = document.querySelector('ul.items li.active'),
-                    nextActive = active.nextElementSibling;
-                active.classList.remove('active');
-                nextActive.classList.add('active');
-                }
-            }
-
-            function keyDown(event) {
-                var key = event.keyCode,
-                    target = document.querySelector('fieldset.enable .button');
-                if (key == 13 || key == 9) next(target);
-            }
-
-            var body = document.querySelector('body'),
-                form = document.querySelector('form'),
-                count = form.querySelectorAll('fieldset').length;
-
-            window.onload = init;
-
-            document.body.onmouseup = function (event) {
-                var target = event.target || event.toElement;
-                if (target.classList.contains("button")) next(target);
-            };
-
-            document.addEventListener("keydown", keyDown, false);
-            });
-            </script>
-
-            <style>
-                body, form, form fieldset, body.error fieldset {
-                    background-color: #333;
-                }
-                h1, h2 {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                font-family: sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                }
-                h1 {
-                top: 24px;
-                color: hsl(0, 0, 100);
-                font-size: 12px;
-                }
-                h2 {
-                top: 44px;
-                color: hsl(0, 0, 100);
-                font-size: 10px;
-                opacity: 0.7;
-                }
-                form {
-                position: absolute;
-                width: 300px;
-                height: 60px;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                }
-                form fieldset {
-                position: absolute;
-                width: 400px;
-                height: 60px;
-                background: hsl(0, 0, 100);
-                border-radius: 3px;
-                opacity: 0;
-                transform: scale(0.2);
-                transition: all 0.4s ease-in-out;
-                }
-                form fieldset input, form fieldset p {
-                display: inline-block;
-                width: 300px;
-                margin-left: 50px;
-                color: hsl(0, 0, 20);
-                font-size: 16px;
-                letter-spacing: 1px;
-                }
-                form fieldset p {
-                margin-top: 22px;
-                text-align: center;
-                }
-                form fieldset input {
-                height: 40px;
-                margin-top: 8px;
-                border: none;
-                outline: none;
-                }
-                form fieldset .icon {
-                position: absolute;
-                width: 30px;
-                height: 30px;
-                top: 15px;
-                transition: all 0.4s ease;
-                }
-                form fieldset .icon i {
-                position: absolute;
-                display: block;
-                }
-                form fieldset .icon.left {
-                left: 10px;
-                }
-                form fieldset .icon.right {
-                right: 10px;
-                cursor: pointer;
-                }
-                form fieldset .icon.button:hover {
-                background: hsl(0, 0, 95);
-                border-radius: 3px;
-                transition: all 0.4s ease;
-                }
-                form fieldset.enable {
-                z-index: 1;
-                opacity: 1;
-                transition: all 0.5s ease-out 0.2s;
-                transform: scale(1);
-                }
-                form fieldset.disable {
-                opacity: 0;
-                transition: all 0.3s ease-in;
-                transform: translateY(120px) scale(0.9);
-                }
-                body.error fieldset {
-                transform-origin: 50% 100%;
-                }
-                @keyframes enable {
-                0% {
-                    opacity: 0;
-                    transform: scale(0.2);
-                }
-                60% {
-                    transform: scale(1.1);
-                }
-                100% {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-                }
-                @keyframes error {
-                0%, 50%, 100% {
-                    transform: rotate(0deg);
-                }
-                25% {
-                    transform: rotate(-3deg);
-                }
-                75% {
-                    transform: rotate(3deg);
-                }
-                }
-            </style>
         @else
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -422,10 +290,10 @@
             </div>
         </div>
         <div class="row mt-5">
-    <div class="col-md-12 d-flex justify-content-center">
-        <h2 style="color: white;">History Pengajuan</h2>
+            <div class="col-md-12 d-flex justify-content-center">
+            <h2 style="color: white;">History Pengajuan</h2>
+        </div>
     </div>
-</div>
         @if($requests->isEmpty())
         <p>Anda belum melakukan pengajuan perubahan sertifikat.</p>
         @else

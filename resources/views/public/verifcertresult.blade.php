@@ -34,7 +34,12 @@
                         if (typeof value === 'object') {
                             table += '<tr><td>' + key + '</td><td>' + jsonToTable(value) + '</td></tr>';
                         } else {
-                            table += '<tr><td>' + key + '</td><td>' + JSON.stringify(value) + '</td></tr>';
+                            if (key === 'Verified') {
+                                const color = value === 'True' ? 'green' : 'red'; // Change color based on value
+                                table += '<tr><td>' + key + '</td><td style="color: ' + color + ';">' + JSON.stringify(value) + '</td></tr>';
+                            } else {
+                                table += '<tr><td>' + key + '</td><td>' + JSON.stringify(value) + '</td></tr>';
+                            }
                         }
                     }
                 }
@@ -42,11 +47,12 @@
                 return table;
             }
 
+
             // Show the pop-up alert with JSON data in a nested table format
             Swal.fire({
-                title: 'Result',
+                title: 'JSON Data',
                 html: "@if($isUploaded)<a>File terkonfirmasi resmi</a>@else <a>File belum/tidak terkonfirmasi resmi</a> @endif" + jsonToTable(@json($data)),
-                icon: 'info',
+                icon: 'success',
                 confirmButtonText: 'OK'
             });
         </script>
