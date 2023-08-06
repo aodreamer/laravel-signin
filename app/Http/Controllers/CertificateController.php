@@ -130,4 +130,38 @@ class CertificateController extends Controller
 
         return back()->with('success', 'Pengajuan perubahan sertifikat berhasil diajukan.');
     }
+
+    public function submitnewRequest(Request $request)
+    {
+        $request->validate([
+            'Country' => 'required',
+            'Province' => 'required',
+            'City' => 'required',
+            'Organization' => 'required',
+            'Organizational_Unit' => 'required',
+            'Common_Name' => 'required',
+            'Email' => 'required',
+            'Password' => 'required',
+        ]);
+        $reason = "C: ". $request->input('Country')."\n";
+        $reason .= "Prov: ". $request->input('Province')."\n";
+        $reason .= "City: ". $request->input('City')."\n";
+        $reason .= "O: ".$request->input('Organization')."\n";
+        $reason .= "OU: ".$request->input('Organizational_Unit')."\n";
+        $reason .= "CN: ".$request->input('Common_Name')."\n";
+        $reason .= "E: ".$request->input('Email')."\n";
+        $reason .= "PW: ".$request->input('Password')."\n";
+
+        // Ambil data user yang sedang login
+        $user = auth()->user();
+
+        // Buat pengajuan perubahan baru
+        ChangeRequest::create([
+            'user_id' => $user->id,
+            'reason' => $reason,
+            'status' => 'pending', // Set status pengajuan ke "pending" (Anda bisa ganti sesuai kebutuhan)
+        ]);
+
+        return back()->with('success', 'Pengajuan sertifikat baru berhasil diajukan.');
+    }
 }

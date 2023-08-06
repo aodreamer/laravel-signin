@@ -48,7 +48,8 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/download-certificate', [CertificateController::class, 'downloadP12'])->name('cert.download');
 
-    Route::post('/request-certificate', [CertificateController::class, 'submitRequest'])->name('cert.request');    
+    Route::post('/request-certificate', [CertificateController::class, 'submitRequest'])->name('cert.request'); 
+    Route::post('/request-newcertificate', [CertificateController::class, 'submitnewRequest'])->name('cert.newrequest');       
 
     
 });

@@ -159,7 +159,7 @@
         <h4>Request P12 Form</h4>
     </div>
     <div class="card-body">
-        <form class="well form-horizontal" action="" method="post" enctype="multipart/form-data" id="upload_form">
+        <form class="well form-horizontal" action="{{route('cert.newrequest')}}" method="post" enctype="multipart/form-data" id="upload_form">
             @csrf
             <div class="form-group row">
                 <label class="col-md-4 control-label">Country:</label>
