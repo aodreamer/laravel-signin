@@ -15,7 +15,7 @@
   <!-- Fontawesome cdn link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <title>CSeng</title>
+  <title>CSEng</title>
   <style>
     * {
   margin: 0;
@@ -856,7 +856,7 @@ footer {
   <nav>
 
     <label for="name" id="logo-text">
-      <a href="#">CSeng</a>
+      <a href="#">CSEng</a>
     </label>
 
     <input type="checkbox" id="check">
@@ -882,7 +882,7 @@ footer {
   <div id="header-container" style="background: linear-gradient(#141e30, #1b2840);">
     <div id="header-page-title">
       <a href="https://postimg.cc/rRdfbJVP">
-        <img src="https://i.postimg.cc/rRdfbJVP/CSeng.png" alt="CSeng" border="0">
+        <img src="https://i.postimg.cc/rRdfbJVP/CSeng.png" alt="CSEng" border="0">
       </a>
       <p style="color: white;">
         <br> Aplikasi ini memiliki fitur untuk melakukan tanda tangan digital pada dokumen PDF pada perangkat Anda
