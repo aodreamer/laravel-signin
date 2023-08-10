@@ -15,7 +15,7 @@
   <!-- Fontawesome cdn link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <title>CSEng</title>
+  <title>SIGNIN</title>
   <style>
     * {
   margin: 0;
@@ -856,7 +856,7 @@ footer {
   <nav>
 
     <label for="name" id="logo-text">
-      <a href="#">CSEng</a>
+      <a href="#">SIGNIN</a>
     </label>
 
     <input type="checkbox" id="check">
