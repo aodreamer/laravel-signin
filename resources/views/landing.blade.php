@@ -1189,16 +1189,6 @@ footer {
 
 </html>
 
-<script>
-  document.getElementById("verify").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default link behavior (prevents page reload)
-    window.location.href = "http://127.0.0.1:8000/verify";
-  });
-  document.getElementById("jdih").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default link behavior (prevents page reload)
-    window.location.href = "http://127.0.0.1:8000/jdih";
-  });
-</script>
 
 <style>
   #letest-news-container {
