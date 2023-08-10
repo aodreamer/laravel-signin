@@ -908,8 +908,8 @@ footer {
     <h1 style="color: white;">Digital Signature in action</h1>
     <p style="color: white;">Nikmati kemudahan dari tanda-tangan elektronik dimanapun dan kapanpun</p>
     <div id="creativity-btn">
-      <a href="#" id="verify">Verify</a>
-      <a href="#" id="jdih">JDIH</a>
+      <a href="{{route('verify.cert.form')}}" id="verify">Verify</a>
+      <a href="{{route('jdih.index')}}" id="jdih">JDIH</a>
     </div>
   </div>
 </section>
