@@ -65,7 +65,10 @@ Route::middleware('admin')->group(function () {
     
     Route::get('/admin/updatefile/{fileId}', [AdminController::class, 'showupdateFile'])->name('update.file.form');
     Route::put('/admin/updatefile/{file}', [AdminController::class, 'updateFile'])->name('update.file');
-    
+
+
+    Route::post('/admin/createLabel', [AdminController::class, 'storeLabel'])->name('create.label');
+    Route::delete('/admin/deleteLabel/{document_label}', [AdminController::class, 'destroyLabel'])->name('delete.label');
 
 });
 

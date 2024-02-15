@@ -6,9 +6,14 @@
                 <h2>Verifikasi dokumen PDF anda</h2>
             </div>
             <div class="card-body">
-                @if(session()->has('message'))
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if(session('success'))
                     <div class="alert alert-info">
-                        {{ session('message') }}
+                        {{ session('success') }}
                     </div>
                 @endif
                 <form method="POST" action="{{ route('verify.upload.pdf') }}" enctype="multipart/form-data">

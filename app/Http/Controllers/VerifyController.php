@@ -9,6 +9,7 @@ use mikehaertl\pdftk\FdfFile;
 use mikehaertl\pdftk\Pdf;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
+use App\Models\VerificationResult;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 class VerifyController extends Controller
@@ -20,6 +21,7 @@ class VerifyController extends Controller
 
     public function uploadPdf(Request $request)
     {
+        $verificationResult = VerificationResult::firstOrCreate([]);
         $request->validate([
             'pdf_file' => 'required|mimes:pdf',
         ]);
@@ -33,9 +35,12 @@ class VerifyController extends Controller
 
         if ($existingFile) {
             // File sudah terverifikasi
-            return True;
+            $verificationResult->increment('verification_success');
+
+            return back()->with('success', 'File terverifikasi resmi');
         } else {
-            return False;
+            $verificationResult->increment('verification_failure');
+            return back()->with('error', 'File belum diupload/palsu');
         }
     }
 
@@ -80,14 +85,14 @@ class VerifyController extends Controller
         
         
         try {
-            $isUploaded = $this->uploadPdf($request);
+            // $isUploaded = $this->uploadPdf($request);
             
             $response = Http::attach('file', $pdfContents, $file->getClientOriginalName())
                 ->post('http://127.0.0.1:5000/verify_pdf_signature'); // Ganti dengan URL endpoint yang sesuai
 
             $data = $response->json();
             // Tampilkan atau proses data response sesuai kebutuhan
-            return view('public.verifcertresult', compact('data', 'isUploaded'));
+            return view('public.verifcertresult', compact('data'));
         } catch (RequestException $e) {
             // Tangani kesalahan jika ada
             return back()->withErrors('Error uploading and processing PDF.');

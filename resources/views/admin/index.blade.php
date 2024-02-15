@@ -133,4 +133,42 @@
         </table>
     </div>
 </div>
+
+<div class="container mt-4">
+    <h2>Daftar Label Document</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Label</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($labels as $label)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{$label->name}}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <form action="{{ route('delete.label', ['document_label' => $label->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-action">Hapus</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <form action="{{ route('create.label') }}" method="POST">
+            @csrf
+            <i>Tambah Label</i>
+            <input type="text" class="input-group-text" name="name">
+            <button type="submit" class="btn btn-success btn-action">Tambah</button>
+        </form>
+    </div>
+</div>
 @endsection

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('filename');
             $table->string('hash', 64); // Hash akan berukuran 64 karakter
             $table->timestamp('date_upload')->nullable();
+            $table->string('labels');
             $table->timestamps();
-    
             $table->foreign('id_author')->references('id')->on('users')->onDelete('cascade');
         });
     }

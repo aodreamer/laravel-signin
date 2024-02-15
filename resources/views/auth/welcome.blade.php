@@ -190,7 +190,7 @@
   <div class="card">
     <div class="face face1">
       <div class="content">
-        <a href="{{ route('verify.cert.form') }}">
+        <a href="{{ route('verify.upload.form') }}">
           <img src="https://i.ibb.co/9nMznVP/verified.png" alt="verified" border="0" width="75" height="75">
         </a>
         <h3>Verify</h3>

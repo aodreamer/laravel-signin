@@ -6,6 +6,7 @@ use App\Models\Request as CertificateRequest;
 use App\Models\Certificate;
 use App\Models\User;
 use App\Models\File;
+use App\Models\DocumentLabel;
 
 
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,8 @@ class AdminController extends Controller
     {
         $files = File::with('author')->get();
         $requests = CertificateRequest::all();
-        return view('admin.index', compact('requests','files'));
+        $labels = DocumentLabel::all();
+        return view('admin.index', compact('requests','files','labels'));
     }
 
     public function changeStatusRequest($id, $status)
@@ -68,6 +70,18 @@ class AdminController extends Controller
             'pass' => $pass,
             'last_modified' => now(),
         ]);
+        DB::table('requests')
+            ->where('user_id', $id)
+            ->update(['status' => 'Success']);
+    }else {
+        // Jika data sertifikat tidak ditemukan, lakukan insert
+        $certificate = new Certificate([
+            'user_id' => $id,
+            'p12_name' => $file->getClientOriginalName(),
+            'pass' => $pass,
+            'last_modified' => now(),
+        ]);
+        $certificate->save();
         DB::table('requests')
             ->where('user_id', $id)
             ->update(['status' => 'Success']);
@@ -120,5 +134,22 @@ public function updateFile(Request $request, File $file)
 
     return redirect()->route('admin.requests')->with('success', 'File has been updated.');
 }
+
+public function storeLabel(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required', // pastikan 'name' harus diisi
+            // tambahkan aturan validasi lainnya jika diperlukan
+        ]);
+
+        DocumentLabel::create($validatedData);
+        return redirect()->route('admin.requests')->with('success', 'Label created successfully');
+    }
+
+    public function destroyLabel(DocumentLabel $document_label)
+    {
+        $document_label->delete();
+        return redirect()->route('admin.requests')->with('success', 'Label deleted successfully');
+    }
 
 }
